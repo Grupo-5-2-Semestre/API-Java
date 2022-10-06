@@ -1,9 +1,20 @@
 package janela;
 
 import conexao.ConexaoUsuario;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import logar.LogarUsuario;
 
 /**
@@ -12,11 +23,16 @@ import logar.LogarUsuario;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
+
+        setIcon();
+
+    }
+
+    @Override
+    public void paintComponents(Graphics g) {
+        super.paintComponents(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     /**
@@ -28,56 +44,239 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        kGradientPanel1 = new keeptoo.KGradientPanel();
         lbUsuario = new javax.swing.JLabel();
-        imputUsuario = new javax.swing.JTextField();
+        inputUsuario = new javax.swing.JTextField();
         lbSenha = new javax.swing.JLabel();
-        imputSenha = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
+        facebookImage = new javax.swing.JLabel();
+        instagramImage = new javax.swing.JLabel();
+        mailImage = new javax.swing.JLabel();
+        inputSenha = new javax.swing.JPasswordField();
+        checkPass = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 0, 153));
 
-        lbUsuario.setText("Usuário");
+        kGradientPanel1.setToolTipText("");
+        kGradientPanel1.setAlignmentX(50.0F);
+        kGradientPanel1.setAlignmentY(50.0F);
+        kGradientPanel1.setkEndColor(new java.awt.Color(0, 51, 102));
+        kGradientPanel1.setkGradientFocus(900);
+        kGradientPanel1.setkStartColor(new java.awt.Color(102, 0, 51));
 
-        lbSenha.setText("Senha");
+        lbUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lbUsuario.setText("Username");
 
-        btnEntrar.setText("Entra");
+        inputUsuario.setForeground(new java.awt.Color(153, 153, 153));
+        inputUsuario.setText("Empresa@xpto");
+        inputUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputUsuarioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputUsuarioFocusLost(evt);
+            }
+        });
+        inputUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                inputUsuarioMouseReleased(evt);
+            }
+        });
+        inputUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputUsuarioActionPerformed(evt);
+            }
+        });
+
+        lbSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbSenha.setForeground(new java.awt.Color(255, 255, 255));
+        lbSenha.setText("Password");
+
+        btnEntrar.setBackground(new java.awt.Color(153, 0, 204));
+        btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEntrar.setText("Login");
+        btnEntrar.setBorder(null);
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEntrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEntrarMouseEntered(evt);
+            }
+        });
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
 
+        btnRegister.setBackground(new java.awt.Color(153, 102, 255));
+        btnRegister.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Register");
+        btnRegister.setActionCommand("Registrar");
+        btnRegister.setBorder(null);
+        btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegisterMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegisterMouseEntered(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Não tem uma conta?");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\giova\\OneDrive\\Área de Trabalho\\API-Java\\trackio\\src\\main\\java\\janela\\user.png")); // NOI18N
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\giova\\OneDrive\\Área de Trabalho\\API-Java\\trackio\\src\\main\\java\\janela\\senha.png")); // NOI18N
+
+        logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\giova\\OneDrive\\Área de Trabalho\\API-Java\\trackio\\src\\main\\java\\janela\\logoTrackio.png")); // NOI18N
+
+        facebookImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\giova\\OneDrive\\Área de Trabalho\\API-Java\\trackio\\src\\main\\java\\janela\\facebook.png")); // NOI18N
+        facebookImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                facebookImageMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                facebookImageMouseEntered(evt);
+            }
+        });
+
+        instagramImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\giova\\OneDrive\\Área de Trabalho\\API-Java\\trackio\\src\\main\\java\\janela\\iconInstagram.png")); // NOI18N
+        instagramImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                instagramImageMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                instagramImageMouseEntered(evt);
+            }
+        });
+
+        mailImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\giova\\OneDrive\\Área de Trabalho\\API-Java\\trackio\\src\\main\\java\\janela\\iconEmail.png")); // NOI18N
+        mailImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mailImageMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mailImageMouseEntered(evt);
+            }
+        });
+
+        inputSenha.setForeground(new java.awt.Color(153, 153, 153));
+        inputSenha.setText("********");
+        inputSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputSenhaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputSenhaFocusLost(evt);
+            }
+        });
+
+        checkPass.setBackground(new java.awt.Color(0, 51, 102));
+        checkPass.setForeground(new java.awt.Color(255, 255, 255));
+        checkPass.setText("Mostrar senha");
+        checkPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkPassActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
+        kGradientPanel1.setLayout(kGradientPanel1Layout);
+        kGradientPanel1Layout.setHorizontalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(facebookImage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(instagramImage)
+                .addGap(10, 10, 10)
+                .addComponent(mailImage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addComponent(jLabel6))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
+                        .addComponent(logo))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkPass)
+                            .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(inputSenha)
+                                .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEntrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(inputUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)))))
+                .addContainerGap(324, Short.MAX_VALUE))
+        );
+        kGradientPanel1Layout.setVerticalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(logo)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(lbUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(inputUsuario))
+                .addGap(21, 21, 21)
+                .addComponent(lbSenha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(checkPass)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(instagramImage)
+                    .addComponent(mailImage)
+                    .addComponent(facebookImage)
+                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
+                .addGap(24, 24, 24))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imputUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(lbUsuario)
-                .addGap(18, 18, 18)
-                .addComponent(imputUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(lbSenha)
-                .addGap(18, 18, 18)
-                .addComponent(imputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnEntrar)
-                .addContainerGap(51, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -86,6 +285,107 @@ public class Login extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         logar();
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void inputUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUsuarioActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_inputUsuarioActionPerformed
+
+    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarMouseClicked
+
+    private void inputUsuarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputUsuarioMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputUsuarioMouseReleased
+
+    private void inputUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusGained
+        if (inputUsuario.getText().equals("Empresa@xpto")) {
+            inputUsuario.setText("");
+            inputUsuario.setForeground(new Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_inputUsuarioFocusGained
+
+    private void inputUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusLost
+        if (inputUsuario.getText().equals("")) {
+            inputUsuario.setText("Empresa@xpto");
+            inputUsuario.setForeground(new Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_inputUsuarioFocusLost
+
+    private void inputSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSenhaFocusGained
+        if (inputSenha.getText().equals("********")) {
+            inputSenha.setText("");
+            inputSenha.setForeground(new Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_inputSenhaFocusGained
+
+    private void inputSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSenhaFocusLost
+        if (inputSenha.getText().equals("")) {
+            inputSenha.setText("********");
+            inputSenha.setForeground(new Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_inputSenhaFocusLost
+
+    private void checkPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPassActionPerformed
+        if (checkPass.isSelected()) {
+            inputSenha.setEchoChar((char) 0);
+        } else {
+            inputSenha.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkPassActionPerformed
+
+    private void btnEntrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseEntered
+        btnEntrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnEntrarMouseEntered
+
+    private void btnRegisterMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseEntered
+        btnRegister.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegisterMouseEntered
+
+    private void facebookImageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facebookImageMouseEntered
+        facebookImage.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_facebookImageMouseEntered
+
+    private void instagramImageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instagramImageMouseEntered
+        instagramImage.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_instagramImageMouseEntered
+
+    private void mailImageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailImageMouseEntered
+        mailImage.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_mailImageMouseEntered
+
+    private void facebookImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facebookImageMouseClicked
+        try {
+            Desktop.getDesktop().browse(new URI("http://www.google.com"));
+        } catch (IOException | URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_facebookImageMouseClicked
+
+    private void instagramImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instagramImageMouseClicked
+        try {
+            Desktop.getDesktop().browse(new URI("http://www.google.com"));
+        } catch (IOException | URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_instagramImageMouseClicked
+
+    private void mailImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailImageMouseClicked
+        try {
+            Desktop.getDesktop().browse(new URI("http://www.google.com"));  
+        } catch (IOException | URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_mailImageMouseClicked
+
+    private void btnRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMouseClicked
+        try {
+            Desktop.getDesktop().browse(new URI("http://www.google.com"));
+        } catch (IOException | URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_btnRegisterMouseClicked
 
     /**
      * @param args the command line arguments
@@ -120,34 +420,55 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JTextField imputSenha;
-    private javax.swing.JTextField imputUsuario;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JCheckBox checkPass;
+    private javax.swing.JLabel facebookImage;
+    private javax.swing.JPasswordField inputSenha;
+    private javax.swing.JTextField inputUsuario;
+    private javax.swing.JLabel instagramImage;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbSenha;
     private javax.swing.JLabel lbUsuario;
+    private javax.swing.JLabel logo;
+    private javax.swing.JLabel mailImage;
     // End of variables declaration//GEN-END:variables
     private void logar() {
         try {
-            String nomeUsuario = imputUsuario.getText();
-            String senhaUsuario = imputSenha.getText();
+            String nomeUsuario = inputUsuario.getText();
+            String senhaUsuario = inputSenha.getText();
 
             LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
-            
+
             ResultSet rsConexao = new ConexaoUsuario().autenticacaoUsuario(logarusuario);
-            
+
             if (rsConexao.next()) {
                 Principal principal = new Principal();
                 principal.setVisible(true);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null,"Usuário e/ou Senha errados");
+                JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
             }
-            
+
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "LogarUsuario: " + erro);
+        }
+    }
+
+    private void setIcon() {
+        try {
+
+            setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icone.png")));
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }
