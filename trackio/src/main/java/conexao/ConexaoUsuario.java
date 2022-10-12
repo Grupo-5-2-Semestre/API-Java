@@ -1,5 +1,6 @@
 package conexao;
 
+import coletardados.PegaDados;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,11 +34,19 @@ public class ConexaoUsuario {
         conexao  = new Conexao().ConectaBD();
         PegaDados pegadados = new PegaDados();
 
-        String sql = "insert into LogMaquina (medicao) values (?)";
-
+        String sql = "insert into LogMaquina (medicao) values (?),(?),(?),(?),(?),(?),(?),(?);";
         try {
             PreparedStatement pstm = conexao.prepareStatement(sql);
-            pstm.setDouble(1, pegadados.pegaNumeroCpusFisica());
+            pstm.setDouble(1, pegadados.getMemoriaDisponivel());
+            pstm.setDouble(2, pegadados.getMemoriaEmUso());
+            pstm.setDouble(3, pegadados.getMemoriaTotal());
+            pstm.setDouble(4, pegadados.getTempoDeAtividade());
+            pstm.setDouble(5, pegadados.getTotalProcessos());
+            pstm.setDouble(6, pegadados.getTotalThreads());
+            pstm.setDouble(7, pegadados.getUsoProcessador());
+            pstm.setDouble(8, pegadados.getNumeroCpusFisicas());
+            
+            pegadados.pegaDadosJSensor();
 
             pstm.execute();
             pstm.close();

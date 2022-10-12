@@ -284,8 +284,6 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         logar();
-        ConexaoUsuario conexaousuario = new ConexaoUsuario();
-        conexaousuario.guardarDados();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void inputUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUsuarioActionPerformed
@@ -453,6 +451,9 @@ public class Login extends javax.swing.JFrame {
             ResultSet rsConexao = new ConexaoUsuario().autenticacaoUsuario(logarusuario);
 
             if (rsConexao.next()) {
+                ConexaoUsuario conexaousuario = new ConexaoUsuario();
+                conexaousuario.guardarDados();
+                
                 Principal principal = new Principal();
                 principal.setVisible(true);
                 dispose();
