@@ -19,7 +19,7 @@ import logar.LogarUsuario;
 
 /**
  *
- * @author T-Gamer
+ * @author Diogo
  */
 public class Login extends javax.swing.JFrame {
 
@@ -284,6 +284,8 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         logar();
+        ConexaoUsuario conexaousuario = new ConexaoUsuario();
+        conexaousuario.guardarDados();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void inputUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUsuarioActionPerformed
@@ -457,7 +459,6 @@ public class Login extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
             }
-
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "LogarUsuario: " + erro);
         }

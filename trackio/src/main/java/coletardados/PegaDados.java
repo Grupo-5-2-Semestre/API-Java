@@ -27,5 +27,9 @@ public class PegaDados {
         
         Temperatura temperatura = looca.getTemperatura();       
     }
-    
+    public Double pegaNumeroCpusFisica () {
+        Looca looca = new Looca();
+
+        return looca.getProcessador().getUso();
+    }
 }

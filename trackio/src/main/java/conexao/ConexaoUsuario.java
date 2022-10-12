@@ -29,4 +29,20 @@ public class ConexaoUsuario {
         }
     }
 
+    public void guardarDados() {
+        conexao  = new Conexao().ConectaBD();
+        PegaDados pegadados = new PegaDados();
+
+        String sql = "insert into LogMaquina (medicao) values (?)";
+
+        try {
+            PreparedStatement pstm = conexao.prepareStatement(sql);
+            pstm.setDouble(1, pegadados.pegaNumeroCpusFisica());
+
+            pstm.execute();
+            pstm.close();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Iserir dados: " + erro);
+        }
+    }
 }
