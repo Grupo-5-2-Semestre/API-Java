@@ -32,7 +32,7 @@ public class ConexaoUsuario {
 
     public void guardarDados() {
         conexao  = new Conexao().ConectaBD();
-        PegaDados pegadados = new PegaDados();
+      // PegaDados pegadados = new PegaDados();
 
         String sql = "insert into LogMaquina (medicao) values (?),(?),(?),(?),(?),(?),(?),(?);";
         try {
