@@ -10,7 +10,7 @@ public class Conexao {
         Connection conexao = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/trackio", "usuario", "senha");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/trackio", "aluno", "sptech");
         } catch (ClassNotFoundException ex) {
             System.out.println("Driver do banco de dados não localizado");
         } catch (SQLException ex) {

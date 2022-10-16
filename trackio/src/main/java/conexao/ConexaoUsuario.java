@@ -1,10 +1,16 @@
 package conexao;
 
+import coletardados.PegaDados;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import logar.LogarUsuario;
 
 public class ConexaoUsuario {
@@ -31,18 +37,38 @@ public class ConexaoUsuario {
 
     public void guardarDados() {
         conexao  = new Conexao().ConectaBD();
-      // PegaDados pegadados = new PegaDados();
+        PegaDados pegadados = new PegaDados();
 
-        String sql = "insert into LogMaquina (medicao) values (?)";
+        int delay = 5000; //milliseconds
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            try {
+                String sql = "insert into LogMaquina (medicao) values (?),(?),(?),(?),(?),(?),(?),(?);";
 
-        try {
-            PreparedStatement pstm = conexao.prepareStatement(sql);
-           // pstm.setDouble(1, pegadados.pegaNumeroCpusFisica());
+                PreparedStatement pstm = conexao.prepareStatement(sql);
+                pstm.setDouble(1, pegadados.getMemoriaDisponivel());
+                pstm.setDouble(2, pegadados.getMemoriaEmUso());
+                pstm.setDouble(3, pegadados.getMemoriaTotal());
+                pstm.setDouble(4, pegadados.getTempoDeAtividade());
+                pstm.setDouble(5, pegadados.getTotalProcessos());
+                pstm.setDouble(6, pegadados.getTotalThreads());
+                pstm.setDouble(7, pegadados.getUsoProcessador());
+                pstm.setDouble(8, pegadados.getNumeroCpusFisicas());
+                
+                pegadados.pegaDadosJSensor();
 
-            pstm.execute();
-            pstm.close();
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Iserir dados: " + erro);
-        }
+                pstm.execute();
+                pstm.close();
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, "Iserir dados: " + erro);
+            }
+
+            }
+        };
+  new Timer(delay, taskPerformer).start();
+            
+            
+            
+        
     }
 }
