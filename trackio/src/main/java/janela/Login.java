@@ -26,9 +26,6 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
-
-     
-
     }
 
     @Override
@@ -64,9 +61,9 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        facebook = new javax.swing.JLabel();
+        instagram = new javax.swing.JLabel();
+        mail = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 0, 153));
@@ -111,7 +108,6 @@ public class Login extends javax.swing.JFrame {
         btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrar.setText("Login");
-        btnEntrar.setBorder(null);
         btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEntrarMouseClicked(evt);
@@ -131,7 +127,6 @@ public class Login extends javax.swing.JFrame {
         btnRegister.setForeground(new java.awt.Color(255, 255, 255));
         btnRegister.setText("Register");
         btnRegister.setActionCommand("Registrar");
-        btnRegister.setBorder(null);
         btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegisterMouseClicked(evt);
@@ -199,11 +194,35 @@ public class Login extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logoTrackio.png"))); // NOI18N
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/facebook.png"))); // NOI18N
+        facebook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/facebook.png"))); // NOI18N
+        facebook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                facebookMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                facebookMouseEntered(evt);
+            }
+        });
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/iconInstagram.png"))); // NOI18N
+        instagram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/iconInstagram.png"))); // NOI18N
+        instagram.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                instagramMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                instagramMouseEntered(evt);
+            }
+        });
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/iconEmail.png"))); // NOI18N
+        mail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/iconEmail.png"))); // NOI18N
+        mail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mailMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mailMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -220,11 +239,11 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(mailImage)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(facebook)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
+                        .addComponent(mail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
+                        .addComponent(instagram)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)))
                 .addGap(18, 18, 18)
@@ -245,13 +264,15 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addGap(248, 248, 248)
-                                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(inputUsuario)
                             .addComponent(lbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(70, 70, 70)
                         .addComponent(jLabel4)
                         .addGap(78, 78, 78))
-                    .addComponent(checkPass)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addComponent(checkPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(413, 413, 413))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
@@ -260,8 +281,8 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(278, 278, 278))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel1Layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(47, 47, 47)))
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                                 .addGap(88, 88, 88)
@@ -317,18 +338,18 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(instagramImage, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(mailImage, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9))
+                        .addComponent(facebook))
+                    .addComponent(mail)
+                    .addComponent(instagram))
                 .addGap(24, 24, 24))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("usuario");
         jLabel5.getAccessibleContext().setAccessibleName("passwd");
         jLabel7.getAccessibleContext().setAccessibleName("trackioLogo");
-        jLabel8.getAccessibleContext().setAccessibleName("facebookImage");
-        jLabel9.getAccessibleContext().setAccessibleName("instagramImage");
-        jLabel10.getAccessibleContext().setAccessibleName("mailImage");
+        facebook.getAccessibleContext().setAccessibleName("facebookImage");
+        instagram.getAccessibleContext().setAccessibleName("instagramImage");
+        mail.getAccessibleContext().setAccessibleName("mailImage");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -437,7 +458,7 @@ public class Login extends javax.swing.JFrame {
 
     private void mailImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailImageMouseClicked
         try {
-            Desktop.getDesktop().browse(new URI("http://www.google.com"));  
+            Desktop.getDesktop().browse(new URI("http://trackio.consultoria@gmail.com"));  
         } catch (IOException | URISyntaxException e1) {
             e1.printStackTrace();
         }
@@ -450,6 +471,42 @@ public class Login extends javax.swing.JFrame {
             e1.printStackTrace();
         }
     }//GEN-LAST:event_btnRegisterMouseClicked
+
+    private void facebookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facebookMouseClicked
+      try {
+            Desktop.getDesktop().browse(new URI("https://www.facebook.com"));
+        } catch (IOException | URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_facebookMouseClicked
+
+    private void mailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailMouseClicked
+         try {
+            Desktop.getDesktop().browse(new URI("mailto:trackio.consultoria@gmail.com?subject=Opa%20again"));
+        } catch (IOException | URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_mailMouseClicked
+
+    private void instagramMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instagramMouseClicked
+        try {
+            Desktop.getDesktop().browse(new URI("https://www.instagram.com"));
+        } catch (IOException | URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_instagramMouseClicked
+
+    private void facebookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facebookMouseEntered
+        facebook.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_facebookMouseEntered
+
+    private void mailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailMouseEntered
+      mail.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_mailMouseEntered
+
+    private void instagramMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instagramMouseEntered
+       instagram.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_instagramMouseEntered
 
     /**
      * @param args the command line arguments
@@ -491,24 +548,24 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnRegister;
     private javax.swing.JCheckBox checkPass;
+    private javax.swing.JLabel facebook;
     private javax.swing.JLabel facebookImage;
     private javax.swing.JPasswordField inputSenha;
     private javax.swing.JTextField inputUsuario;
+    private javax.swing.JLabel instagram;
     private javax.swing.JLabel instagramImage;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbSenha;
     private javax.swing.JLabel lbUsuario;
     private javax.swing.JLabel logo;
+    private javax.swing.JLabel mail;
     private javax.swing.JLabel mailImage;
     // End of variables declaration//GEN-END:variables
     private void logar() {
