@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import logar.LogarUsuario;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ConexaoUsuario {
     
@@ -36,33 +37,21 @@ public class ConexaoUsuario {
     }
 
     public void guardarDados() {
-        conexao  = new Conexao().ConectaBD();
+        JdbcTemplate conexao = new Database().getConnection();
         PegaDados pegadados = new PegaDados();
 
         int delay = 5000; //milliseconds
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            try {
-                String sql = "insert into LogMaquina (medicao) values (?),(?),(?),(?),(?),(?),(?),(?);";
-
-                PreparedStatement pstm = conexao.prepareStatement(sql);
-                pstm.setDouble(1, pegadados.getMemoriaDisponivel());
-                pstm.setDouble(2, pegadados.getMemoriaEmUso());
-                pstm.setDouble(3, pegadados.getMemoriaTotal());
-                pstm.setDouble(4, pegadados.getTempoDeAtividade());
-                pstm.setDouble(5, pegadados.getTotalProcessos());
-                pstm.setDouble(6, pegadados.getTotalThreads());
-                pstm.setDouble(7, pegadados.getUsoProcessador());
-                pstm.setDouble(8, pegadados.getNumeroCpusFisicas());
-                
+                String sql = String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
+                        + "(3,1,%.2f),(3,1,%.2f),(3,1,%.2f),(1,1,%.2f)",
+                        pegadados.getMemoriaDisponivel()/10000,
+                        pegadados.getMemoriaEmUso()/10000,
+                        pegadados.getMemoriaTotal()/10000,
+                        pegadados.getUsoProcessador());
                 pegadados.pegaDadosJSensor();
-
-                pstm.execute();
-                pstm.close();
-            } catch (SQLException erro) {
-                JOptionPane.showMessageDialog(null, "Iserir dados: " + erro);
-            }
-
+                
+                conexao.execute(sql);
             }
         };
   new Timer(delay, taskPerformer).start();
