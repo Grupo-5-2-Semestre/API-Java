@@ -1,6 +1,7 @@
 package janela;
 
 import conexao.ConexaoUsuario;
+import conexao.Database;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -516,7 +517,7 @@ public class Login extends javax.swing.JFrame {
 
             LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
 
-            ResultSet rsConexao = new ConexaoUsuario().autenticacaoUsuario(logarusuario);
+            ResultSet rsConexao = new Database().teste(logarusuario);
 
             if (rsConexao.next()) {
                 ConexaoUsuario conexaousuario = new ConexaoUsuario();
