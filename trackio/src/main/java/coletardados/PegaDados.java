@@ -81,8 +81,8 @@ public class PegaDados {
         return temperatura.getTemperatura();
     }
     
-    public void pegaDadosJSensor(){
-            
+    public Integer pegaDadosJSensor(){
+        Double tempGpu = 0.0;
         Components components = JSensors.get.components();
 
         List<Gpu> gpus = components.gpus;
@@ -96,6 +96,7 @@ public class PegaDados {
                   List<Temperature> temps = gpu.sensors.temperatures;
                   for (final Temperature temp : temps) {
                       System.out.println(temp.name + ": " + temp.value + " C");
+                      tempGpu = temp.value;
                   }
 
                   //Print fan speed
@@ -111,5 +112,6 @@ public class PegaDados {
                 }
             }
         }
+        return tempGpu.intValue();
     }
 };

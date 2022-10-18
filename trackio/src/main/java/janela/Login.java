@@ -1,6 +1,7 @@
 package janela;
 
 import conexao.ConexaoUsuario;
+import conexao.Database;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -11,11 +12,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import logar.LogarUsuario;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 
 /**
@@ -567,15 +570,22 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel mailImage;
     // End of variables declaration//GEN-END:variables
     private void logar() {
-        try {
+        
             String nomeUsuario = inputUsuario.getText();
             String senhaUsuario = inputSenha.getText();
 
             LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
 
-            ResultSet rsConexao = new ConexaoUsuario().autenticacaoUsuario(logarusuario);
-
-            if (rsConexao.next()) {
+            JdbcTemplate conexao = new Database().getConnection();
+            
+            String selectSql = "select * from [dbo].[Funcionario] where nomeFuncionario = '"
+                + logarusuario.getNomeUsuario()
+                + "' and senhaFuncionario = '"
+                + logarusuario.getSenhaUsuario()
+                +"'";
+        
+            List retorno = conexao.queryForList(selectSql);
+            if(retorno.size() >= 1){
                 ConexaoUsuario conexaousuario = new ConexaoUsuario();
                 conexaousuario.guardarDados();
                 
@@ -585,10 +595,5 @@ public class Login extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
             }
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "LogarUsuario: " + erro);
-        }
-    }
-
-    
+    }    
 }
