@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import logar.LogarUsuario;
@@ -44,12 +42,12 @@ public class ConexaoUsuario {
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 String sql = String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
-                        + "(3,1,%.2f),(3,1,%.2f),(3,1,%.2f),(1,1,%.2f)",
-                        pegadados.getMemoriaDisponivel()/10000,
-                        pegadados.getMemoriaEmUso()/10000,
-                        pegadados.getMemoriaTotal()/10000,
-                        pegadados.getUsoProcessador());
-                pegadados.pegaDadosJSensor();
+                        + "(3,1,%.0f),(3,1,%.0f),(3,1,%.0f),(1,1,%.0f),(2,4,%d)",
+                        pegadados.getMemoriaDisponivel()/1000000000,
+                        pegadados.getMemoriaEmUso()/1000000000,
+                        pegadados.getMemoriaTotal()/1000000000,
+                        pegadados.getUsoProcessador(),
+                        pegadados.pegaDadosJSensor());
                 
                 conexao.execute(sql);
             }
