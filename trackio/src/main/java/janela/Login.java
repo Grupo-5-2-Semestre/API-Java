@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         lbUsuario = new javax.swing.JLabel();
         inputUsuario = new javax.swing.JTextField();
@@ -65,6 +66,8 @@ public class Login extends javax.swing.JFrame {
         instagram = new javax.swing.JLabel();
         mail = new javax.swing.JLabel();
 
+        jToolBar1.setRollover(true);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 0, 153));
 
@@ -80,7 +83,7 @@ public class Login extends javax.swing.JFrame {
         lbUsuario.setText("Username");
 
         inputUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        inputUsuario.setText("meuUser2022");
+        inputUsuario.setText("meuEmail@gmail.com");
         inputUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 inputUsuarioFocusGained(evt);
@@ -271,7 +274,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(78, 78, 78))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(checkPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkPass, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                         .addGap(413, 413, 413))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -383,7 +386,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_inputUsuarioMouseReleased
 
     private void inputUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusGained
-        if (inputUsuario.getText().equals("meuUser2022")) {
+        if (inputUsuario.getText().equals("meuEmail@gmail.com")) {
             inputUsuario.setText("");
             inputUsuario.setForeground(new Color(0, 0, 0));
         }
@@ -391,7 +394,7 @@ public class Login extends javax.swing.JFrame {
 
     private void inputUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUsuarioFocusLost
         if (inputUsuario.getText().equals("")) {
-            inputUsuario.setText("meuUser2022");
+            inputUsuario.setText("meuEmail@gmail.com");
             inputUsuario.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputUsuarioFocusLost
@@ -559,6 +562,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JToolBar jToolBar1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbSenha;
     private javax.swing.JLabel lbUsuario;
