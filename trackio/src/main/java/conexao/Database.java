@@ -10,13 +10,21 @@ public class Database {
 
       BasicDataSource dataSource = new BasicDataSource();
 
-      dataSource​.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+      /*dataSource​.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
       dataSource​.setUrl("jdbc:sqlserver://srv-trackio.database.windows.net:1433;database=bd-trackio");
       
       dataSource​.setUsername("admin-trackio@srv-trackio");
 
-      dataSource​.setPassword("#Gfgrupo5");  
+      dataSource​.setPassword("#Gfgrupo5");  */
+      
+      dataSource​.setDriverClassName("com.mysql.jdbc.Driver");
+
+      dataSource​.setUrl("jdbc:mysql://localhost/trackio");
+      
+      dataSource​.setUsername("root");
+
+      dataSource​.setPassword("urubu100");  
 
       this.connection = new JdbcTemplate(dataSource);
 
