@@ -1,0 +1,31 @@
+insert into Empresa (nomeEmpresa,emailEmpresa,telefoneEmpresa,cnpj,senhaEmpresa) values 
+("C6BANK","c6bank@gmail.com", "1126987630", "12345678901234", "#Urubu100"),
+("E&Y", "ey@gmail.com", "1120930585", "98765432101234", "#Urubu200");
+
+insert into Usuario (nomeUsuario,emailUsuario,senhaUsuario,fkEmpresa) values
+("Marcos", "marcos.roberto@c6bank.com", "#Gf2022", 1),
+("Roberto", "roberto.marcos@ey.com.br", "#Gf2023", 2);
+
+insert into Funcionario (nomeFuncionario,emailFuncionario,telefoneFuncionario,fkUsuario) values
+("Ana Clara", "ana.clara@c6bank.com", "1125665255", 2),
+("Clara Ana", "clara.ana@ey.com.br", "1120930585", 1);
+
+insert into Maquina (numeroSerie,marca,fkFuncionario) values
+("F600", "Samsung", 2),
+("E200", "Dell", 1);
+
+insert into Componente (nomeComponente) values
+("CPU"),
+("memoria RAM");
+
+insert into ComponenteMaquina (fkComponente,fkMaquina,statusMC) values
+(1,2,3),
+(2,1,4);
+
+insert into TiposValores (descIndicador) values
+("%"),
+("GM");
+
+insert into LogMaquina (medicao,fkComponente,fkMaquina) values
+("10.2", 1, 2),
+("12.4", 2, 1);
