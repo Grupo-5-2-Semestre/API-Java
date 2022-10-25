@@ -18,9 +18,9 @@ public class Database {
 
       dataSource​.setPassword("#Gfgrupo5");  */
       
-      dataSource​.setDriverClassName("com.mysql.jdbc.Driver");
+      dataSource​.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-      dataSource​.setUrl("jdbc:mysql://localhost/trackio");
+      dataSource​.setUrl("jdbc:mysql://172.31.17.43:3306/trackio");
       
       dataSource​.setUsername("root");
 
