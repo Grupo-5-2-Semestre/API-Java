@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import logGenerator.logs;
 import logar.LogarUsuario;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -16,9 +19,10 @@ public class ConexaoUsuario {
     
     Connection conexao;
     
-    public ResultSet autenticacaoUsuario (LogarUsuario logarusuario) {
+    public ResultSet autenticacaoUsuario (LogarUsuario logarusuario)  {
         conexao = new Conexao().ConectaBD();
         
+       
         try {
             String sql = "select * from usuario where nomeUsuario = ? and senhaUsuario = ?";
             
@@ -28,13 +32,33 @@ public class ConexaoUsuario {
             
             ResultSet rs = pstm.executeQuery();
             return rs;
+            
         } catch (SQLException erro) {
+            
             JOptionPane.showMessageDialog(null, "LogarUsuario: " + erro);
-            return null;
-        }
+    
+         
+            
+        return null;
     }
+    }
+    
+    public void guardarDados () {
+        
+                  // data/hora atual
+                    LocalDateTime agora = LocalDateTime.now();
 
-    public void guardarDados() {
+                    // formatar a data
+                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+                    String dataFormatada = formatterData.format(agora);
+
+                    // formatar a hora
+                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String horaFormatada = formatterHora.format(agora);
+
+                 logs.generateLog(" Captura de dados iniciada - API Trackio " + "Data:" + dataFormatada + " Hora:" + horaFormatada );
+                    
+        
         JdbcTemplate conexao = new Database().getConnection();
         PegaDados pegadados = new PegaDados();
 
@@ -49,7 +73,8 @@ public class ConexaoUsuario {
                         pegadados.getUsoProcessador(),
                         pegadados.pegaDadosJSensor());
                 
-                conexao.execute(sql);
+                 conexao.execute(sql);
+                
             }
         };
   new Timer(delay, taskPerformer).start();
