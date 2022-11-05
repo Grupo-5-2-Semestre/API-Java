@@ -4,7 +4,6 @@ import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.temperatura.Temperatura;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
-import com.profesorfalken.jsensors.model.components.Cpu;
 import com.profesorfalken.jsensors.model.components.Gpu;
 import com.profesorfalken.jsensors.model.sensors.Fan;
 import com.profesorfalken.jsensors.model.sensors.Load;
@@ -86,8 +85,10 @@ public class PegaDados {
         Components components = JSensors.get.components();
 
         List<Gpu> gpus = components.gpus;
+        
         if (gpus != null) {
             for (final Gpu gpu : gpus) {
+                
                 System.out.println("Found CPU component: " + gpu.name);
                 if (gpu.sensors != null) {
                   System.out.println("Sensors: ");
@@ -95,6 +96,7 @@ public class PegaDados {
                   //Print temperatures
                   List<Temperature> temps = gpu.sensors.temperatures;
                   for (final Temperature temp : temps) {
+                      
                       System.out.println(temp.name + ": " + temp.value + " C");
                       tempGpu = temp.value;
                   }

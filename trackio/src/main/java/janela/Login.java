@@ -12,12 +12,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import logar.LogarUsuario;
+import org.apache.commons.logging.LogSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
@@ -575,6 +578,17 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private void logar() {
         
+           //data/hora atual
+                    LocalDateTime agora = LocalDateTime.now();
+
+                    // formatar a data
+                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+                    String dataFormatada = formatterData.format(agora);
+
+                    // formatar a hora
+                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String horaFormatada = formatterHora.format(agora);
+   
             String nomeUsuario = inputUsuario.getText();
             String senhaUsuario = inputSenha.getText();
 
@@ -596,8 +610,15 @@ public class Login extends javax.swing.JFrame {
                 Principal principal = new Principal();
                 principal.setVisible(true);
                 dispose();
+                
+                logInformationGenerator.LogInformation.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+                
             } else {
+                
                 JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
+                logErrorGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
             }
     }    
 }

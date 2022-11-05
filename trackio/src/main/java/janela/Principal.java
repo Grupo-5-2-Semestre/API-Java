@@ -20,6 +20,8 @@ import java.net.URISyntaxException;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -41,11 +43,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void setUpOs() {
 
+        
+                   //data/hora atual
+                    LocalDateTime agora = LocalDateTime.now();
+
+                    // formatar a data
+                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+                    String dataFormatada = formatterData.format(agora);
+
+                    // formatar a hora
+                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String horaFormatada = formatterHora.format(agora);
+    
+    
         Sistema sistema = looca.getSistema();
         Processador processador = looca.getProcessador();
         Memoria memoria = looca.getMemoria();
         DiscoGrupo grupoDeDiscos = looca.getGrupoDeDiscos();
-          Integer numeroAleatorio = ThreadLocalRandom.current().nextInt(0, 101);
+        Integer numeroAleatorio = ThreadLocalRandom.current().nextInt(0, 101);
         
 
         DecimalFormat formatador = new DecimalFormat();
@@ -70,6 +85,19 @@ public class Principal extends javax.swing.JFrame {
          id.setForeground(Color.white);
          logou.setText(String.format("%s logou", processador.getId()));
 
+         if(processador.getUso() >= 80){
+         
+               logInformationGenerator.LogInformation.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
+                       + processador.getNome()   + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+         
+         } if(memoria.getEmUso() >= 80){
+         
+               logInformationGenerator.LogInformation.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  Memória Restante: " 
+                       + memoria.getDisponivel()  + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+         
+         }
+         
+         
     }
 
     /**

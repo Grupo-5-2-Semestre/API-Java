@@ -1,5 +1,8 @@
-
-package logErrorGenerator;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package logInformationGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,24 +11,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
 /**
  *
  * @author lucas
  */
-public class LogError {
-
+public class LogInformation {
    
-public static void generateLogError(String message)  {
-    
-Path path = Paths.get("C:/Users/lucas/OneDrive/Área de Trabalho/PI - 2° Semestre/Logs/ErrorLogs.txt");
+	
+public static void generateLogInfo(String message)  {
+
+                              
+Path path = Paths.get("C:/Users/lucas/OneDrive/Área de Trabalho/PI - 2° Semestre/Logs/InformationLogs.txt");
 		
 try{
 if(!Files.exists(path)) {
       Files.createDirectory(path);
       }
 
-       File log = new File("C:/Users/lucas/OneDrive/Área de Trabalho/PI - 2° Semestre/Logs/ErrorLogs.txt");
+       File log = new File("C:/Users/lucas/OneDrive/Área de Trabalho/PI - 2° Semestre/Logs/InformationLogs.txt");
 
            if(!log.exists()) {
    log.createNewFile();
@@ -34,7 +37,8 @@ if(!Files.exists(path)) {
 
             FileWriter fw = new FileWriter(log, true);
             BufferedWriter bw = new BufferedWriter(fw);
-           bw.write("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            
+            bw.write("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.write(message);
             bw.write("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.newLine();
