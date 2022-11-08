@@ -85,18 +85,7 @@ public class Principal extends javax.swing.JFrame {
          id.setForeground(Color.white);
          logou.setText(String.format("%s logou", processador.getId()));
 
-         if(processador.getUso() >= 80){
-         
-               logInformationGenerator.LogInformation.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
-                       + processador.getNome()   + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
-         
-         } if(memoria.getEmUso() >= 80){
-         
-               logInformationGenerator.LogInformation.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  Memória Restante: " 
-                       + memoria.getDisponivel()  + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
-         
-         }
-         
+     
          
     }
 

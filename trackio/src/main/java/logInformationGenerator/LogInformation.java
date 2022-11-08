@@ -21,14 +21,14 @@ public class LogInformation {
 public static void generateLogInfo(String message)  {
 
                               
-Path path = Paths.get("C:/Users/lucas/OneDrive/Área de Trabalho/PI - 2° Semestre/Logs/InformationLogs.txt");
+Path path = Paths.get("trackio/Logs/InformationLogs.txt");
 		
 try{
 if(!Files.exists(path)) {
       Files.createDirectory(path);
       }
 
-       File log = new File("C:/Users/lucas/OneDrive/Área de Trabalho/PI - 2° Semestre/Logs/InformationLogs.txt");
+       File log = new File("trackio/Logs/InformationLogs.txt");
 
            if(!log.exists()) {
    log.createNewFile();
@@ -38,9 +38,9 @@ if(!Files.exists(path)) {
             FileWriter fw = new FileWriter(log, true);
             BufferedWriter bw = new BufferedWriter(fw);
             
-            bw.write("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.write(message);
-            bw.write("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.newLine();
             
              bw.close();
