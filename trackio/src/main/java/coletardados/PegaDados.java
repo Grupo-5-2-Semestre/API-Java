@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PegaDados {
     Looca looca = new Looca();
-    
+    private String hostname = looca.getProcessador().getId();
     private Integer totalProcessos = looca.getGrupoDeProcessos().getTotalProcessos();
     private Integer totalThreads = looca.getGrupoDeProcessos().getTotalThreads();
         
@@ -28,10 +28,28 @@ public class PegaDados {
     private Instant inicializado = looca.getSistema().getInicializado();
 
     private Long memoriaDisponivel = looca.getMemoria().getDisponivel();
+
+    
     private Long memoriaEmUso = looca.getMemoria().getEmUso();
     private Long memoriaTotal = looca.getMemoria().getTotal();
 
-    private Temperatura temperatura = looca.getTemperatura();  
+    private Temperatura temperatura = looca.getTemperatura();
+    
+    private Long discoDisponivel = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
+    private Long discoTotal = looca.getGrupoDeDiscos().getVolumes().get(0).getTotal();
+
+    public Long getDiscoDisponivel() {
+        return discoDisponivel;
+    }
+
+    public Long getDiscoTotal() {
+        return discoTotal;
+    }
+
+    public Long getDiscoEmUso() {
+        return discoEmUso;
+    }
+    private Long discoEmUso = (looca.getGrupoDeDiscos().getVolumes().get(0).getTotal()-looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel());
 
     public Double getTotalProcessos() {
         return totalProcessos.doubleValue();
@@ -43,6 +61,10 @@ public class PegaDados {
 
     public Double getUsoProcessador() {
         return usoProcessador;
+    }
+
+    public String getHostname() {
+        return hostname;
     }
 
     public Double getNumeroCpusFisicas() {

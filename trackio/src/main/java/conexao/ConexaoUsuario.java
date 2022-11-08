@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import logar.LogarUsuario;
@@ -37,19 +38,38 @@ public class ConexaoUsuario {
     public void guardarDados() {
         JdbcTemplate conexao = new Database().getConnection();
         PegaDados pegadados = new PegaDados();
-
+        String identificador = pegadados.getHostname();
         int delay = 5000; //milliseconds
+        String sqlInsert = String.format("insert into MaquinasComponentes (fkComponente,fkMaquina,statusMC) VALUES "
+                + "(1,6,1),"
+                + "(2,6,1)")
         ActionListener taskPerformer = new ActionListener() {
+
             public void actionPerformed(ActionEvent evt) {
+                String queryidCompMaquina = String.format("Select idMaquinaComponente from MaquinasComponentes "
+                        + "join Maquina on idMaquina = fkMaquina where numeroSerie = '%s'",identificador);
+                List idMaquinaComp = conexao.queryForList(queryidCompMaquina);
+                System.out.println(pegadados.pegaDadosJSensor());
                 String sql = String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
-                        + "(3,1,%.0f),(3,1,%.0f),(3,1,%.0f),(1,1,%.0f),(2,4,%d)",
-                        pegadados.getMemoriaDisponivel()/1000000000,
-                        pegadados.getMemoriaEmUso()/1000000000,
-                        pegadados.getMemoriaTotal()/1000000000,
+                        + "(%d,1,%.0f),(%d,2,%.0f),(%d,3,%.0f),(%d,4,%.0f),(%d,5,%d)",
+                        idMaquinaComp.get(0),
                         pegadados.getUsoProcessador(),
-                        pegadados.pegaDadosJSensor());
+                        idMaquinaComp.get(1),
+                        pegadados.pegaDadosJSensor(),
+                        idMaquinaComp.get(2),
+                        pegadados.getMemoriaTotal()/1000000000,
+                        idMaquinaComp.get(3),
+                        pegadados.getDiscoTotal()
+                        
+                );
                 
                 conexao.execute(sql);
+                //cpu //1
+                //gpu //3
+                //ram //2
+                //disco //2
+                //temp //4
+                
             }
         };
   new Timer(delay, taskPerformer).start();
