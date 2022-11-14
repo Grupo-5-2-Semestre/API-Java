@@ -16,7 +16,12 @@ import java.util.List;
 public class PegaDados {
     Looca looca = new Looca();
     private String hostname = looca.getProcessador().getId();
+    private String identifier = looca.getProcessador().getIdentificador();
     private Integer totalProcessos = looca.getGrupoDeProcessos().getTotalProcessos();
+
+    public String getIdentifier() {
+        return identifier;
+    }
     private Integer totalThreads = looca.getGrupoDeProcessos().getTotalThreads();
         
     private Double usoProcessador = looca.getProcessador().getUso();
@@ -103,7 +108,7 @@ public class PegaDados {
         return temperatura.getTemperatura();
     }
     
-    public Integer pegaDadosJSensor(){
+    public Integer pegaDadosJSensorTemp(){
         Double tempGpu = 0.0;
         Components components = JSensors.get.components();
 
@@ -136,4 +141,40 @@ public class PegaDados {
         }
         return tempGpu.intValue();
     }
+    
+    public Integer pegaDadosJSensorRpm(){
+        Double rpmGpu = 0.0;
+        Components components = JSensors.get.components();
+
+        List<Gpu> gpus = components.gpus;
+        if (gpus != null) {
+            for (final Gpu gpu : gpus) {
+                System.out.println("Found CPU component: " + gpu.name);
+                if (gpu.sensors != null) {
+                  System.out.println("Sensors: ");
+
+                  //Print temperatures
+                  List<Temperature> temps = gpu.sensors.temperatures;
+                  for (final Temperature temp : temps) {
+                      System.out.println(temp.name + ": " + temp.value + " C");
+                      
+                  }
+
+                  //Print fan speed
+                  List<Fan> fans = gpu.sensors.fans;
+                  for (final Fan fan : fans) {
+                      System.out.println(fan.name + ": " + fan.value + " RPM");
+                  }
+
+                  List<Load> loads = gpu.sensors.loads;
+                  for (final Load load : loads) {
+                      System.out.println(load.name + ": " + load.value + " RPM");
+                      rpmGpu = load.value;
+                  }
+                }
+            }
+        }
+        return rpmGpu.intValue();
+    }
+    
 };
