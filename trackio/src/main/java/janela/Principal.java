@@ -20,6 +20,8 @@ import java.net.URISyntaxException;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -41,6 +43,18 @@ public class Principal extends javax.swing.JFrame {
 
     private void setUpOs() {
 
+         //data/hora atual
+                    LocalDateTime agora = LocalDateTime.now();
+
+                    // formatar a data
+                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+                    String dataFormatada = formatterData.format(agora);
+
+                    // formatar a hora
+                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String horaFormatada = formatterHora.format(agora);
+        
+        
         Sistema sistema = looca.getSistema();
         Processador processador = looca.getProcessador();
         Memoria memoria = looca.getMemoria();
@@ -69,8 +83,32 @@ public class Principal extends javax.swing.JFrame {
         id.setText(String.format("%s", sistema.getSistemaOperacional()));
          id.setForeground(Color.white);
          logou.setText(String.format("%s logou", processador.getId()));
-
+        
+      
+        if (memoria.getEmUso() < 20) {
+           logInfoGenerator.LogInfo.generateLogInfo("A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+           
+        } else {
+            
+            logInfoGenerator.LogInfo.generateLogInfo("Memória livre para uso - API Trackio | "
+                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+            
+        }  if(processador.getUso() >= 80){
+         
+               logInfoGenerator.LogInfo.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
+                       + processador.getNome()   + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+         
+         
+        } else {
+         logInfoGenerator.LogInfo.generateLogInfo("Sistema executando de forma otimizada - API Trackio | "
+                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+        }
     }
+         
+     
+         
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
