@@ -40,22 +40,15 @@ public class ConexaoUsuario {
         PegaDados pegadados = new PegaDados();
         String identificador = pegadados.getHostname();
         int delay = 5000; //milliseconds
-        System.out.println(identificador);
         String sqlIdMaquina = "SELECT idMaquina FROM Maquina where numeroSerie = '" + identificador + "';";
         Object objetoMaquina = conexao.queryForList(sqlIdMaquina);
         String idMaquinaString = objetoMaquina.toString();
-        System.out.println(idMaquinaString);
         String idMaquina = "";
-        System.out.println("Estou Aqui");
         for (int i = 0; i < idMaquinaString.length(); i++) {
             if (i > 11 && i < (idMaquinaString.length() - 2)) {
                 idMaquina += idMaquinaString.charAt(i);
             }
         }
-        System.out.println("Passei do for");
-        System.out.println(idMaquina);
-        System.out.println("printei id");
-        System.out.println(objetoMaquina);
 
         String sqlExisteComp = "SELECT * FROM MaquinasComponentes where fkMaquina = '" + idMaquina + "';";
         List objetoExisteComp = conexao.queryForList(sqlExisteComp);
@@ -79,49 +72,66 @@ public class ConexaoUsuario {
                 + "join Maquina on idMaquina = fkMaquina where numeroSerie = '%s'", identificador);
         List idMaquinaComp = conexao.queryForList(queryidCompMaquina);
 
+        System.out.println("Preparando para inserir");
+        System.out.println("Dados inseridos: ");
+
         ActionListener taskPerformer = new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
-                System.out.println("Preparando para inserir");
-                System.out.println(pegadados.pegaDadosJSensorRpm());
-                System.out.println("Dados inseridos: ");
+
+//                System.out.println(idMaquinaComp.get(0).getClass().getSimpleName());
+//                System.out.println(pegadados.getUsoProcessador().getClass().getSimpleName());
+//                System.out.println(idMaquinaComp.get(1).getClass().getSimpleName());
+//                System.out.println(pegadados.pegaDadosJSensorRpm().getClass().getSimpleName());
+//                System.out.println(idMaquinaComp.get(2).getClass().getSimpleName());
+//                System.out.println("Double");
+//                System.out.println(idMaquinaComp.get(3).getClass().getSimpleName());
+//                System.out.println("Long");
+//                System.out.println(idMaquinaComp.get(4).getClass().getSimpleName());
+//                System.out.println("Double");
+//                System.out.println(idMaquinaComp.get(5).getClass().getSimpleName());
+//                System.out.println("Long");
+//                System.out.println(idMaquinaComp.get(6).getClass().getSimpleName());
+//                System.out.println(pegadados.getTemperatura().getClass().getSimpleName());
+//                System.out.println(idMaquinaComp.get(7).getClass().getSimpleName());
+//                System.out.println(pegadados.pegaDadosJSensorTemp().getClass().getSimpleName());
                 System.out.println(String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
-                        + "(%d,1,%.0f),(%d,3,%d),(%d,2,%.0f),(%d,2,%.d),(%d,2,%.0f),(%d,2,%d),(%d,4,%d),(%d,4,%d)",
-                        idMaquinaComp.get(0),
+                        + "(%d,1,%.0f),(%d,3,%d),(%d,2,%.0f),(%d,2,%d),(%d,2,%.0f),(%d,2,%d),(%d,4,%.0f),(%d,4,%d)",
+                        formatarID(idMaquinaComp.get(0)),
                         pegadados.getUsoProcessador(),
-                        idMaquinaComp.get(1),
+                        formatarID(idMaquinaComp.get(1)),
                         pegadados.pegaDadosJSensorRpm(),
-                        idMaquinaComp.get(2),
+                        formatarID(idMaquinaComp.get(2)),
                         pegadados.getMemoriaTotal() / 1000000000,
-                        idMaquinaComp.get(3),
-                        pegadados.getDiscoTotal()/1000000000,
-                        idMaquinaComp.get(4),
+                        formatarID(idMaquinaComp.get(3)),
+                        pegadados.getDiscoTotal() / 1000000000,
+                        formatarID(idMaquinaComp.get(4)),
                         pegadados.getMemoriaEmUso() / 1000000000,
-                        idMaquinaComp.get(5),
-                        pegadados.getDiscoEmUso()/1000000000,
-                        idMaquinaComp.get(6),
+                        formatarID(idMaquinaComp.get(5)),
+                        pegadados.getDiscoEmUso() / 1000000000,
+                        formatarID(idMaquinaComp.get(6)),
                         pegadados.getTemperatura(),
-                        idMaquinaComp.get(7),
+                        formatarID(idMaquinaComp.get(7)),
                         pegadados.pegaDadosJSensorTemp()
                 ));
-                
+
                 String sql = String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
                         + "(%d,1,%.0f),(%d,3,%d),(%d,2,%.0f),(%d,2,%d),(%d,2,%.0f),(%d,2,%d),(%d,4,%.0f),(%d,4,%d)",
-                        idMaquinaComp.get(0),
+                        formatarID(idMaquinaComp.get(0)),
                         pegadados.getUsoProcessador(),
-                        idMaquinaComp.get(1),
+                        formatarID(idMaquinaComp.get(1)),
                         pegadados.pegaDadosJSensorRpm(),
-                        idMaquinaComp.get(2),
+                        formatarID(idMaquinaComp.get(2)),
                         pegadados.getMemoriaTotal() / 1000000000,
-                        idMaquinaComp.get(3),
-                        pegadados.getDiscoTotal()/1000000000,
-                        idMaquinaComp.get(4),
+                        formatarID(idMaquinaComp.get(3)),
+                        pegadados.getDiscoTotal() / 1000000000,
+                        formatarID(idMaquinaComp.get(4)),
                         pegadados.getMemoriaEmUso() / 1000000000,
-                        idMaquinaComp.get(5),
-                        pegadados.getDiscoEmUso()/1000000000,
-                        idMaquinaComp.get(6),
+                        formatarID(idMaquinaComp.get(5)),
+                        pegadados.getDiscoEmUso() / 1000000000,
+                        formatarID(idMaquinaComp.get(6)),
                         pegadados.getTemperatura(),
-                        idMaquinaComp.get(7),
+                        formatarID(idMaquinaComp.get(7)),
                         pegadados.pegaDadosJSensorTemp()
                 );
 
@@ -136,5 +146,16 @@ public class ConexaoUsuario {
         };
         new Timer(delay, taskPerformer).start();
 
+    }
+
+    public Integer formatarID(Object objetoId) {
+        String resultado = objetoId.toString();
+        String id = "";
+        for (int i = 0; i < resultado.length(); i++) {
+            if (i > 20 && i < (resultado.length() - 1)) {
+                id += resultado.charAt(i);
+            }
+        }
+        return Integer.parseInt(id);
     }
 }
