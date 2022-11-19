@@ -1,4 +1,4 @@
-package logErrorGenerator;
+package logGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,7 +43,7 @@ if(!Files.exists(path)) {
             
       } catch(Exception e){
 
-    System.out.println("Deu ruim");
+         logGenerator.LogError.generateLogError( "Error:" + e); 
 
    
     

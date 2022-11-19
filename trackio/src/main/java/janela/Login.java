@@ -611,14 +611,14 @@ public class Login extends javax.swing.JFrame {
                 principal.setVisible(true);
                 dispose();
                 
-             logInfoGenerator.LogInfo.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
+             logGenerator.LogInfo.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
                         " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
                 
             } else {
                 
                 JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
                 
-                logErrorGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
+                logGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
                         " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
                 
             }
