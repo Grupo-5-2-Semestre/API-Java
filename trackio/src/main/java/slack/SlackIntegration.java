@@ -10,9 +10,34 @@ public class SlackIntegration {
     private static String oAuthToken = "xoxb-4328363629682-4325432005829-W0tK8NCoLLgonlPGVhLYvhLM";
     private static String slackChannel = "alertas";
 
-    public static void main(String[] args) {
-        sendMessageToSlack("segunda mensagem");
+    public void enviarMensagemCpu(Insersao insersao, String nomeComponente) {
+        sendMessageToSlack(String.format("Computador em estado crítico devido ao"
+                + " componente %s! Pois seu uso está em %0.f %",
+                nomeComponente, insersao.getTemperatura()));
+    }
 
+    public void enviarMensagemDisco(Insersao insersao, String nomeComponente) {
+        sendMessageToSlack(String.format("Computador em estado crítico devido ao"
+                + " componente %s! Pois seu uso está em %d %",
+                nomeComponente, insersao.getDiscoEmUso()));
+    }
+
+    public void enviarMensagemRam(Insersao insersao, String nomeComponente) {
+        sendMessageToSlack(String.format("Computador em estado crítico devido ao"
+                + " componente %s! Pois seu uso está em %d %",
+                nomeComponente, insersao.getDiscoEmUso()));
+    }
+
+    public void enviarMensagemTempGpu(Insersao insersao, String nomeComponente) {
+        sendMessageToSlack(String.format("Computador em estado crítico devido ao"
+                + " componente %s! Pois seu uso está em %d %",
+                nomeComponente, insersao.getDiscoEmUso()));
+    }
+
+    public void enviarMensagemUsoGpu(Insersao insersao, String nomeComponente) {
+        sendMessageToSlack(String.format("Computador em estado crítico devido ao"
+                + " componente %s! Pois seu uso está em %d %",
+                nomeComponente, insersao.getDiscoEmUso()));
     }
 
     public static void sendMessageToSlack(String message) {
