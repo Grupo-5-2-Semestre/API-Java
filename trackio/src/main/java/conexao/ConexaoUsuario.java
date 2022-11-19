@@ -3,6 +3,7 @@ package conexao;
 import coletardados.PegaDados;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import logar.LogarUsuario;
 import org.springframework.jdbc.core.JdbcTemplate;
+import slack.SlackBd;
 
 public class ConexaoUsuario {
 
@@ -28,11 +30,43 @@ public class ConexaoUsuario {
             pstm.setString(2, logarusuario.getSenhaUsuario());
 
             ResultSet rs = pstm.executeQuery();
+            // getSlackBd();
             return rs;
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "LogarUsuario: " + erro);
             return null;
         }
+    }
+
+    public void getSlackBd() {
+        SlackBd slack = new SlackBd();
+
+        try {
+            slack.postDisk();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        try {
+            slack.postRam();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        try {
+            slack.postCpuTemp();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        try {
+            slack.postGpuTemp();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        try {
+            slack.postGpuUse();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
     }
 
     public void guardarDados() {
@@ -148,6 +182,25 @@ public class ConexaoUsuario {
 
     }
 
+    //Método que envia idMaquina para o Slack
+    public String pegaIdMaquina() {
+        JdbcTemplate conexao = new Database().getConnection();
+        PegaDados pegadados = new PegaDados();
+        String identificador = pegadados.getHostname();
+        int delay = 5000; //milliseconds
+        String sqlIdMaquina = "SELECT idMaquina FROM Maquina where numeroSerie = '" + identificador + "';";
+        Object objetoMaquina = conexao.queryForList(sqlIdMaquina);
+        String idMaquinaString = objetoMaquina.toString();
+        String idMaquina = "";
+        for (int i = 0; i < idMaquinaString.length(); i++) {
+            if (i > 11 && i < (idMaquinaString.length() - 2)) {
+                idMaquina += idMaquinaString.charAt(i);
+            }
+        }
+
+        return idMaquina;
+    }
+
     public Integer formatarID(Object objetoId) {
         String resultado = objetoId.toString();
         String id = "";
@@ -158,4 +211,5 @@ public class ConexaoUsuario {
         }
         return Integer.parseInt(id);
     }
+
 }

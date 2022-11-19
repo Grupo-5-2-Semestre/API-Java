@@ -22,10 +22,10 @@ public class Insersao {
     public Insersao() {
         this.usoProcessador = dados.getUsoProcessador();
         this.dadosJsensorRpm = dados.pegaDadosJSensorRpm();
-        this.memoriaTotal = dados.getMemoriaTotal();
-        this.discoTotal = dados.getDiscoTotal();
-        this.memoriaEmUso = dados.getMemoriaEmUso();
-        this.discoEmUso = dados.getDiscoEmUso();
+        this.memoriaTotal = dados.getMemoriaTotal() / 1000000000;
+        this.discoTotal = dados.getDiscoTotal() / 1000000000;
+        this.memoriaEmUso = dados.getMemoriaEmUso() / 1000000000;
+        this.discoEmUso = dados.getDiscoEmUso() / 1000000000;
         this.temperatura = dados.getTemperatura();
         this.dadosJsensorTemp = dados.pegaDadosJSensorTemp();
     }
