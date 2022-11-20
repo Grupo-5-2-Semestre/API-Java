@@ -604,6 +604,7 @@ public class Login extends javax.swing.JFrame {
         List retorno = conexao.queryForList(selectSql);
         if (retorno.size() >= 1) {
             ConexaoUsuario conexaousuario = new ConexaoUsuario();
+            conexaousuario.getSlackBd();
             conexaousuario.guardarDados();
 
             Principal principal = new Principal();
