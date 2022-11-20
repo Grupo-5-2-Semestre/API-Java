@@ -1,4 +1,4 @@
-package logErrorGenerator;
+package logGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,7 +40,11 @@ public class LogError {
             bw.close();
             fw.close();
 
+<<<<<<< HEAD:trackio/src/main/java/logErrorGenerator/LogError.java
         } catch (IOException e) {
+=======
+         logGenerator.LogError.generateLogError( "Error:" + e); 
+>>>>>>> 7efaaf46a674a73f6a8509cf7290743c8374c181:trackio/src/main/java/logGenerator/LogError.java
 
             System.out.println("Deu ruim");
 

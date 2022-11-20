@@ -599,6 +599,7 @@ public class Login extends javax.swing.JFrame {
                 + logarusuario.getNomeUsuario()
                 + "' and senhaFuncionario = '"
                 + logarusuario.getSenhaUsuario()
+<<<<<<< HEAD
                 + "'";
 
         List retorno = conexao.queryForList(selectSql);
@@ -623,4 +624,29 @@ public class Login extends javax.swing.JFrame {
 
         }
     }
+=======
+                +"'";
+        
+            List retorno = conexao.queryForList(selectSql);
+            if(retorno.size() >= 1){
+                ConexaoUsuario conexaousuario = new ConexaoUsuario();
+                conexaousuario.guardarDados();
+                
+                Principal principal = new Principal();
+                principal.setVisible(true);
+                dispose();
+                
+             logGenerator.LogInfo.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+                
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
+                
+                logGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+                
+            }
+    }    
+>>>>>>> 7efaaf46a674a73f6a8509cf7290743c8374c181
 }
