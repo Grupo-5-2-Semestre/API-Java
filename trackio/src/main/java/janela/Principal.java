@@ -86,21 +86,21 @@ public class Principal extends javax.swing.JFrame {
         
       
         if (memoria.getEmUso() < 20) {
-           logInfoGenerator.LogInfo.generateLogInfo("A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+           logGenerator.LogInfo.generateLogInfo("A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
            
         } else {
             
-            logInfoGenerator.LogInfo.generateLogInfo("Memória livre para uso - API Trackio | "
+            logGenerator.LogInfo.generateLogInfo("Memória livre para uso - API Trackio | "
                     + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
             
         }  if(processador.getUso() >= 80){
          
-               logInfoGenerator.LogInfo.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
+               logGenerator.LogInfo.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
                        + processador.getNome()   + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
          
          
         } else {
-         logInfoGenerator.LogInfo.generateLogInfo("Sistema executando de forma otimizada - API Trackio | "
+         logGenerator.LogInfo.generateLogInfo("Sistema executando de forma otimizada - API Trackio | "
                     + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
         }
     }

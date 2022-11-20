@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package logInfoGenerator;
+package logGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,24 +7,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
 /**
  *
  * @author lucas
  */
-public class LogInfo {
-   
-	
-public static void generateLogInfo(String message)  {
+public class LogError {
 
-                              
-Path path = Paths.get("./Downloads/trackio/Logs/InfoLogs.txt");
+   
+public static void generateLogError(String message)  {
+    
+Path path = Paths.get("./Downloads/trackio/Logs/ErrorLogs.txt");
 		
 try{
 if(!Files.exists(path)) {
       Files.createDirectory(path);
       }
 
-       File log = new File("./Downloads/trackio/Logs/InfoLogs.txt");
+       File log = new File("./Downloads/trackio/Logs/ErrorLogs.txt");
 
            if(!log.exists()) {
    log.createNewFile();
@@ -37,8 +33,7 @@ if(!Files.exists(path)) {
 
             FileWriter fw = new FileWriter(log, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            
-            bw.write("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            bw.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.write(message);
             bw.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.newLine();
@@ -48,7 +43,7 @@ if(!Files.exists(path)) {
             
       } catch(Exception e){
 
-    System.out.println("Deu ruim");
+         logGenerator.LogError.generateLogError( "Error:" + e); 
 
    
     
@@ -56,4 +51,3 @@ if(!Files.exists(path)) {
 
 }
 }
-

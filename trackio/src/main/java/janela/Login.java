@@ -576,51 +576,53 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel mailImage;
     // End of variables declaration//GEN-END:variables
     private void logar() {
+        
+             //data/hora atual
+                    LocalDateTime agora = LocalDateTime.now();
 
-        //data/hora atual
-        LocalDateTime agora = LocalDateTime.now();
+                    // formatar a data
+                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+                    String dataFormatada = formatterData.format(agora);
 
-        // formatar a data
-        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
-        String dataFormatada = formatterData.format(agora);
+                    // formatar a hora
+                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String horaFormatada = formatterHora.format(agora);
+        
+        
+            String nomeUsuario = inputUsuario.getText();
+            String senhaUsuario = inputSenha.getText();
 
-        // formatar a hora
-        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String horaFormatada = formatterHora.format(agora);
+            LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
 
-        String nomeUsuario = inputUsuario.getText();
-        String senhaUsuario = inputSenha.getText();
-
-        LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
-
-        JdbcTemplate conexao = new Database().getConnection();
-
-        String selectSql = "select * from [dbo].[Funcionario] where nomeFuncionario = '"
+            JdbcTemplate conexao = new Database().getConnection();
+            
+          
+            
+            String selectSql = "select * from [dbo].[Funcionario] where nomeFuncionario = '"
                 + logarusuario.getNomeUsuario()
                 + "' and senhaFuncionario = '"
                 + logarusuario.getSenhaUsuario()
-                + "'";
-
-        List retorno = conexao.queryForList(selectSql);
-        if (retorno.size() >= 1) {
-            ConexaoUsuario conexaousuario = new ConexaoUsuario();
-            conexaousuario.getSlackBd();
-            conexaousuario.guardarDados();
-
-            Principal principal = new Principal();
-            principal.setVisible(true);
-            dispose();
-
-            logInfoGenerator.LogInfo.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()
-                    + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
-
-            logErrorGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario()
-                    + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
-
-        }
-    }
+                +"'";
+        
+            List retorno = conexao.queryForList(selectSql);
+            if(retorno.size() >= 1){
+                ConexaoUsuario conexaousuario = new ConexaoUsuario();
+                conexaousuario.getSlackBd();
+                conexaousuario.guardarDados();
+                Principal principal = new Principal();
+                principal.setVisible(true);
+                dispose();
+                
+             logGenerator.LogInfo.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+                
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
+                
+                logGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+                
+            }
+    }    
 }

@@ -2,7 +2,7 @@ package slack;
 
 import conexao.ConexaoUsuario;
 import java.io.IOException;
-import logErrorGenerator.LogError;
+import logGenerator.LogError;
 
 /**
  *
