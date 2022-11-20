@@ -7,29 +7,27 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
 /**
  *
  * @author lucas
  */
 public class LogError {
 
-   
-public static void generateLogError(String message)  {
-    
-Path path = Paths.get("./Downloads/trackio/Logs/ErrorLogs.txt");
-		
-try{
-if(!Files.exists(path)) {
-      Files.createDirectory(path);
-      }
+    public static void generateLogError(String message) {
 
-       File log = new File("./Downloads/trackio/Logs/ErrorLogs.txt");
+        Path path = Paths.get("./Downloads/trackio/Logs/ErrorLogs.txt");
 
-           if(!log.exists()) {
-   log.createNewFile();
-  
-           }
+        try {
+            if (!Files.exists(path)) {
+                Files.createDirectory(path);
+            }
+
+            File log = new File("./Downloads/trackio/Logs/ErrorLogs.txt");
+
+            if (!log.exists()) {
+                log.createNewFile();
+
+            }
 
             FileWriter fw = new FileWriter(log, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -37,17 +35,15 @@ if(!Files.exists(path)) {
             bw.write(message);
             bw.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.newLine();
-            
-             bw.close();
+
+            bw.close();
             fw.close();
-            
-      } catch(Exception e){
 
-         logGenerator.LogError.generateLogError( "Error:" + e); 
+        } catch (Exception e) {
 
-   
-    
-}
+            logGenerator.LogError.generateLogError("Error:" + e);
 
-}
+        }
+
+    }
 }
