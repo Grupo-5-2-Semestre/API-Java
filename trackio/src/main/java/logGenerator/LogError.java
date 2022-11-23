@@ -15,14 +15,14 @@ public class LogError {
 
     public static void generateLogError(String message) {
 
-        Path path = Paths.get("./Downloads/trackio/Logs");
+        Path path = Paths.get("./Downloads/Trackio-JAR/Logs");
 
         try {
             if (!Files.exists(path)) {
                 Files.createDirectory(path);
             }
 
-            File log = new File("./Downloads/trackio/Logs/ErrorLogs.txt");
+            File log = new File("./Downloads/Trackio-JAR/Logs/ErrorLogs.txt");
 
             if (!log.exists()) {
                 log.createNewFile();

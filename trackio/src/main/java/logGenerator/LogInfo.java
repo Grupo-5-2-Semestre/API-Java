@@ -21,14 +21,14 @@ public class LogInfo {
 public static void generateLogInfo(String message)  {
 
                               
-Path path = Paths.get("./Downloads/trackio/Logs");
+Path path = Paths.get("./Downloads/Trackio-JAR/Logs");
 		
 try{
 if(!Files.exists(path)) {
       Files.createDirectory(path);
       }
 
-       File log = new File("./Downloads/trackio/Logs/InfoLogs.txt");
+       File log = new File("./Downloads/Trackio-JAR/Logs/InfoLogs.txt");
 
            if(!log.exists()) {
    log.createNewFile();
