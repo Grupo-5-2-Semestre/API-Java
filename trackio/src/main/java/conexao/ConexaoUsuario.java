@@ -71,6 +71,7 @@ public class ConexaoUsuario {
 
     public void guardarDados() {
         JdbcTemplate conexao = new Database().getConnection();
+        JdbcTemplate conexao2 = new Database().getConnection2();
         PegaDados pegadados = new PegaDados();
         String identificador = pegadados.getHostname();
         int delay = 5000; //milliseconds
@@ -101,6 +102,7 @@ public class ConexaoUsuario {
                     + "(10," + idMaquina + ",1);";
 
             conexao.execute(sqlInsert);
+            conexao2.execute(sqlInsert);
         }
         String queryidCompMaquina = String.format("Select idMaquinaComponente from MaquinasComponentes "
                 + "join Maquina on idMaquina = fkMaquina where numeroSerie = '%s'", identificador);
@@ -170,6 +172,7 @@ public class ConexaoUsuario {
                 );
 
                 conexao.execute(sql);
+                conexao2.execute(sql);
                 //cpu //1
                 //gpu //3
                 //ram //2
