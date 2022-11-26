@@ -43,23 +43,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void setUpOs() {
 
-         //data/hora atual
-                    LocalDateTime agora = LocalDateTime.now();
+        //data/hora atual
+        LocalDateTime agora = LocalDateTime.now();
 
-                    // formatar a data
-                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
-                    String dataFormatada = formatterData.format(agora);
+        // formatar a data
+        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        String dataFormatada = formatterData.format(agora);
 
-                    // formatar a hora
-                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-                    String horaFormatada = formatterHora.format(agora);
-        
-        
+        // formatar a hora
+        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaFormatada = formatterHora.format(agora);
+
         Sistema sistema = looca.getSistema();
         Processador processador = looca.getProcessador();
         Memoria memoria = looca.getMemoria();
         DiscoGrupo grupoDeDiscos = looca.getGrupoDeDiscos();
-          Integer numeroAleatorio = ThreadLocalRandom.current().nextInt(0, 101);
+        Integer numeroAleatorio = ThreadLocalRandom.current().nextInt(0, 101);
         
 
         DecimalFormat formatador = new DecimalFormat();
@@ -81,10 +80,9 @@ public class Principal extends javax.swing.JFrame {
         gpu.setText("Nome: Geforce Rtx 3050 ");
         gpu2.setText(String.format("Em uso: %d%%", numeroAleatorio));
         id.setText(String.format("%s", sistema.getSistemaOperacional()));
-         id.setForeground(Color.white);
-         logou.setText(String.format("%s logou", processador.getId()));
-        
-      
+        id.setForeground(Color.white);
+        logou.setText(String.format("%s logou", processador.getId()));
+
         if (memoria.getEmUso() < 20) {
            logGenerator.LogInfo.generateLogInfo("Info: A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
            

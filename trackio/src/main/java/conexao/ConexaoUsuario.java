@@ -9,17 +9,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import logErrorGenerator.LogError;
 import logar.LogarUsuario;
 import org.springframework.jdbc.core.JdbcTemplate;
 import slack.SlackBd;
+import oshi.jna.platform.linux.LinuxLibc;
 
 public class ConexaoUsuario {
+    //data/hora atual
+    LocalDateTime agora = LocalDateTime.now();
 
+    // formatar a data
+    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+    String dataFormatada = formatterData.format(agora);
+
+    // formatar a hora
+    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+    String horaFormatada = formatterHora.format(agora);
+    
     Connection conexao;
-
-    public ResultSet autenticacaoUsuario(LogarUsuario logarusuario) {
+    
+    public ResultSet autenticacaoUsuario (LogarUsuario logarusuario)  {
         conexao = new Conexao().ConectaBD();
 
         try {
@@ -32,10 +46,11 @@ public class ConexaoUsuario {
             ResultSet rs = pstm.executeQuery();
             // getSlackBd();
             return rs;
+            
         } catch (SQLException erro) {
+            
             JOptionPane.showMessageDialog(null, "LogarUsuario: " + erro);
-            return null;
-        }
+           
     }
 
     public void getSlackBd() {
@@ -68,12 +83,13 @@ public class ConexaoUsuario {
         }
 
     }
-
-    public void guardarDados() {
+    
+    public void guardarDados () {
         JdbcTemplate conexao = new Database().getConnection();
         JdbcTemplate conexao2 = new Database().getConnection2();
         PegaDados pegadados = new PegaDados();
         String identificador = pegadados.getHostname();
+        logInformationGenerator.LogInformation.generateLogInfo("Info: Captura de dados iniciada - API Trackio | " + "Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
         int delay = 5000; //milliseconds
         String sqlIdMaquina = "SELECT idMaquina FROM Maquina where numeroSerie = '" + identificador + "';";
         Object objetoMaquina = conexao.queryForList(sqlIdMaquina);
@@ -178,7 +194,6 @@ public class ConexaoUsuario {
                 //ram //2
                 //disco //2
                 //temp //4
-
             }
         };
         new Timer(delay, taskPerformer).start();
