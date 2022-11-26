@@ -607,7 +607,7 @@ public class Login extends javax.swing.JFrame {
         if (retorno.size() >= 1) {
             ConexaoUsuario conexaousuario = new ConexaoUsuario();
             conexaousuario.getSlackBd();
-            conexaousuario.guardarDados();
+            //conexaousuario.guardarDados();
 
             Principal principal = new Principal();
             principal.setVisible(true);

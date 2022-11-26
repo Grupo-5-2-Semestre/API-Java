@@ -6,7 +6,7 @@ import coletardados.PegaDados;
  *
  * @author giova
  */
-public class Insersao {
+public class Insercao {
 
     private Double usoProcessador;
     private Integer dadosJsensorRpm;
@@ -19,7 +19,7 @@ public class Insersao {
 
     PegaDados dados = new PegaDados();
 
-    public Insersao() {
+    public Insercao() {
         this.usoProcessador = dados.getUsoProcessador();
         this.dadosJsensorRpm = dados.pegaDadosJSensorRpm();
         this.memoriaTotal = dados.getMemoriaTotal() / 1000000000;

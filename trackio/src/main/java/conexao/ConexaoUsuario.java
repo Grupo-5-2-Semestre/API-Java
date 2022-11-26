@@ -131,22 +131,6 @@ public class ConexaoUsuario {
 
             public void actionPerformed(ActionEvent evt) {
 
-//                System.out.println(idMaquinaComp.get(0).getClass().getSimpleName());
-//                System.out.println(pegadados.getUsoProcessador().getClass().getSimpleName());
-//                System.out.println(idMaquinaComp.get(1).getClass().getSimpleName());
-//                System.out.println(pegadados.pegaDadosJSensorRpm().getClass().getSimpleName());
-//                System.out.println(idMaquinaComp.get(2).getClass().getSimpleName());
-//                System.out.println("Double");
-//                System.out.println(idMaquinaComp.get(3).getClass().getSimpleName());
-//                System.out.println("Long");
-//                System.out.println(idMaquinaComp.get(4).getClass().getSimpleName());
-//                System.out.println("Double");
-//                System.out.println(idMaquinaComp.get(5).getClass().getSimpleName());
-//                System.out.println("Long");
-//                System.out.println(idMaquinaComp.get(6).getClass().getSimpleName());
-//                System.out.println(pegadados.getTemperatura().getClass().getSimpleName());
-//                System.out.println(idMaquinaComp.get(7).getClass().getSimpleName());
-//                System.out.println(pegadados.pegaDadosJSensorTemp().getClass().getSimpleName());
                 System.out.println(String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
                         + "(%d,1,%.0f),(%d,3,%d),(%d,2,%.0f),(%d,2,%d),(%d,2,%.0f),(%d,2,%d),(%d,4,%.0f),(%d,4,%d)",
                         formatarID(idMaquinaComp.get(0)),

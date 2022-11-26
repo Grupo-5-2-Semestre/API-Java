@@ -5,6 +5,7 @@
 package janela;
 
 import java.awt.Cursor;
+import slack.Insercao;
 
 /**
  *
