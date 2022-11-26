@@ -140,7 +140,7 @@ public class Principal extends javax.swing.JFrame {
         new Timer(delay, taskPerformer).start();
 
 
-        logou.setText(String.format("%s logou", processador.getId()));
+        id.setText(String.format("%s logou", processador.getId()));
 
         if (memoria.getEmUso() < 20) {
            logGenerator.LogInfo.generateLogInfo("Info: A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
@@ -255,7 +255,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
-        setPreferredSize(new java.awt.Dimension(860, 560));
+        setPreferredSize(new java.awt.Dimension(890, 560));
 
         kGradientPanel1.setForeground(new java.awt.Color(255, 255, 255));
         kGradientPanel1.setAlignmentX(50.0F);
@@ -595,9 +595,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
