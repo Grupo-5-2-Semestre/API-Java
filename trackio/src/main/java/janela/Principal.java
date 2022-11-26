@@ -61,9 +61,11 @@ public class Principal extends javax.swing.JFrame {
         //data/hora atual
         LocalDateTime agora = LocalDateTime.now();
 
+
         // formatar a data
         DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
         String dataFormatada = formatterData.format(agora);
+
 
         // formatar a hora
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -74,6 +76,7 @@ public class Principal extends javax.swing.JFrame {
         Memoria memoria = looca.getMemoria();
         DiscoGrupo grupoDeDiscos = looca.getGrupoDeDiscos();
         Integer numeroAleatorio = ThreadLocalRandom.current().nextInt(0, 101);
+
 
         DecimalFormat formatador = new DecimalFormat();
 
@@ -87,6 +90,7 @@ public class Principal extends javax.swing.JFrame {
         //dados sidebar
         id.setText(String.format("%s", sistema.getSistemaOperacional()));
         id.setForeground(Color.white);
+
         id.setText(String.format("%s", processador.getId()));
 
         process.setText(String.format("Temperatura: %.2f °C", insercao.getTemperatura()));
@@ -134,6 +138,28 @@ public class Principal extends javax.swing.JFrame {
             }
         };
         new Timer(delay, taskPerformer).start();
+
+
+        logou.setText(String.format("%s logou", processador.getId()));
+
+        if (memoria.getEmUso() < 20) {
+           logGenerator.LogInfo.generateLogInfo("Info: A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+           
+        } else {
+            
+            logGenerator.LogInfo.generateLogInfo("Info: Memória livre para uso - API Trackio | "
+                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+            
+        }  if(processador.getUso() >= 80){
+         
+               logGenerator.LogInfo.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
+                       + processador.getNome()   + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+         
+         
+        } else {
+         logGenerator.LogInfo.generateLogInfo("Info: Sistema executando de forma otimizada - API Trackio | "
+                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+        }
 
     }
 

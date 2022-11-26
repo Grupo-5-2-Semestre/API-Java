@@ -119,4 +119,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>trackio</name>
 </project>

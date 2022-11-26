@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import logar.LogarUsuario;
+import org.apache.commons.logging.LogSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import slack.SlackBd;
 
@@ -575,6 +576,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel mail;
     private javax.swing.JLabel mailImage;
     // End of variables declaration//GEN-END:variables
+
       private void logar() {
 
         //data/hora atual
@@ -611,15 +613,14 @@ public class Login extends javax.swing.JFrame {
             principal.setVisible(true);
             dispose();
 
-            logGenerator.LogInfo.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()
-                    + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+            logInformationGenerator.LogInformation.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
 
         } else {
 
             JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
-
-            logGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario()
-                    + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+            logErrorGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
+                        " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
 
         }
     }
