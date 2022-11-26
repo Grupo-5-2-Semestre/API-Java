@@ -596,6 +596,7 @@ public class Login extends javax.swing.JFrame {
         LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
 
         JdbcTemplate conexao = new Database().getConnection();
+        JdbcTemplate conexao2 = new Database().getConnection2();
 
         String selectSql = "select * from [dbo].[Funcionario] where nomeFuncionario = '"
                 + logarusuario.getNomeUsuario()
