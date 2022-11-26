@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import logar.LogarUsuario;
 import org.apache.commons.logging.LogSource;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+import slack.SlackBd;
 
 /**
  *
@@ -465,7 +465,7 @@ public class Login extends javax.swing.JFrame {
 
     private void mailImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailImageMouseClicked
         try {
-            Desktop.getDesktop().browse(new URI("http://trackio.consultoria@gmail.com"));  
+            Desktop.getDesktop().browse(new URI("http://trackio.consultoria@gmail.com"));
         } catch (IOException | URISyntaxException e1) {
             e1.printStackTrace();
         }
@@ -480,7 +480,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterMouseClicked
 
     private void facebookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facebookMouseClicked
-      try {
+        try {
             Desktop.getDesktop().browse(new URI("https://www.facebook.com"));
         } catch (IOException | URISyntaxException e1) {
             e1.printStackTrace();
@@ -488,7 +488,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_facebookMouseClicked
 
     private void mailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailMouseClicked
-         try {
+        try {
             Desktop.getDesktop().browse(new URI("mailto:trackio.consultoria@gmail.com?subject=Opa%20again"));
         } catch (IOException | URISyntaxException e1) {
             e1.printStackTrace();
@@ -508,11 +508,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_facebookMouseEntered
 
     private void mailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mailMouseEntered
-      mail.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        mail.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_mailMouseEntered
 
     private void instagramMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instagramMouseEntered
-       instagram.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        instagram.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_instagramMouseEntered
 
     /**
@@ -576,49 +576,52 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel mail;
     private javax.swing.JLabel mailImage;
     // End of variables declaration//GEN-END:variables
-    private void logar() {
-        
-           //data/hora atual
-                    LocalDateTime agora = LocalDateTime.now();
 
-                    // formatar a data
-                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
-                    String dataFormatada = formatterData.format(agora);
+      private void logar() {
 
-                    // formatar a hora
-                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-                    String horaFormatada = formatterHora.format(agora);
-   
-            String nomeUsuario = inputUsuario.getText();
-            String senhaUsuario = inputSenha.getText();
+        //data/hora atual
+        LocalDateTime agora = LocalDateTime.now();
 
-            LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
+        // formatar a data
+        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        String dataFormatada = formatterData.format(agora);
 
-            JdbcTemplate conexao = new Database().getConnection();
-            
-            String selectSql = "select * from [dbo].[Funcionario] where nomeFuncionario = '"
+        // formatar a hora
+        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaFormatada = formatterHora.format(agora);
+
+        String nomeUsuario = inputUsuario.getText();
+        String senhaUsuario = inputSenha.getText();
+
+        LogarUsuario logarusuario = new LogarUsuario(nomeUsuario, senhaUsuario);
+
+        JdbcTemplate conexao = new Database().getConnection();
+
+        String selectSql = "select * from [dbo].[Funcionario] where nomeFuncionario = '"
                 + logarusuario.getNomeUsuario()
                 + "' and senhaFuncionario = '"
                 + logarusuario.getSenhaUsuario()
-                +"'";
-        
-            List retorno = conexao.queryForList(selectSql);
-            if(retorno.size() >= 1){
-                ConexaoUsuario conexaousuario = new ConexaoUsuario();
-                conexaousuario.guardarDados();
-                
-                Principal principal = new Principal();
-                principal.setVisible(true);
-                dispose();
-                
-                logInformationGenerator.LogInformation.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
+                + "'";
+
+        List retorno = conexao.queryForList(selectSql);
+        if (retorno.size() >= 1) {
+            ConexaoUsuario conexaousuario = new ConexaoUsuario();
+            conexaousuario.getSlackBd();
+            conexaousuario.guardarDados();
+
+            Principal principal = new Principal();
+            principal.setVisible(true);
+            dispose();
+
+            logInformationGenerator.LogInformation.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
                         " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
-                
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
-                logErrorGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
+            logErrorGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
                         " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
-            }
-    }    
+
+        }
+    }
 }

@@ -11,13 +11,18 @@ import com.profesorfalken.jsensors.model.sensors.Temperature;
 import java.time.Instant;
 import java.util.List;
 
-
 public class PegaDados {
+
     Looca looca = new Looca();
-    
+    private String hostname = looca.getProcessador().getId();
+    private String identifier = looca.getProcessador().getIdentificador();
     private Integer totalProcessos = looca.getGrupoDeProcessos().getTotalProcessos();
+
+    public String getIdentifier() {
+        return identifier;
+    }
     private Integer totalThreads = looca.getGrupoDeProcessos().getTotalThreads();
-        
+
     private Double usoProcessador = looca.getProcessador().getUso();
     private Integer numeroCpusFisicas = looca.getProcessador().getNumeroCpusFisicas();
     private Integer numeroCpusLogicas = looca.getProcessador().getNumeroCpusLogicas();
@@ -27,10 +32,28 @@ public class PegaDados {
     private Instant inicializado = looca.getSistema().getInicializado();
 
     private Long memoriaDisponivel = looca.getMemoria().getDisponivel();
+
     private Long memoriaEmUso = looca.getMemoria().getEmUso();
     private Long memoriaTotal = looca.getMemoria().getTotal();
 
-    private Temperatura temperatura = looca.getTemperatura();  
+    private Temperatura temperatura = looca.getTemperatura();
+
+    private Long discoDisponivel = looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
+    private Long discoTotal = looca.getGrupoDeDiscos().getVolumes().get(0).getTotal();
+
+    private Long discoEmUso = ((looca.getGrupoDeDiscos().getVolumes().get(0).getTotal()) - (looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel()));
+
+    public Long getDiscoDisponivel() {
+        return discoDisponivel;
+    }
+
+    public Long getDiscoTotal() {
+        return discoTotal;
+    }
+
+    public Long getDiscoEmUso() {
+        return discoEmUso;
+    }
 
     public Double getTotalProcessos() {
         return totalProcessos.doubleValue();
@@ -42,6 +65,10 @@ public class PegaDados {
 
     public Double getUsoProcessador() {
         return usoProcessador;
+    }
+
+    public String getHostname() {
+        return hostname;
     }
 
     public Double getNumeroCpusFisicas() {
@@ -79,8 +106,8 @@ public class PegaDados {
     public Double getTemperatura() {
         return temperatura.getTemperatura();
     }
-    
-    public Integer pegaDadosJSensor(){
+
+    public Integer pegaDadosJSensorTemp() {
         Double tempGpu = 0.0;
         Components components = JSensors.get.components();
 
@@ -91,29 +118,65 @@ public class PegaDados {
                 
                 System.out.println("Found CPU component: " + gpu.name);
                 if (gpu.sensors != null) {
-                  System.out.println("Sensors: ");
+                
+                    System.out.println("Sensors: ");
 
-                  //Print temperatures
-                  List<Temperature> temps = gpu.sensors.temperatures;
-                  for (final Temperature temp : temps) {
-                      
-                      System.out.println(temp.name + ": " + temp.value + " C");
-                      tempGpu = temp.value;
-                  }
+                    //Print temperatures
+                    List<Temperature> temps = gpu.sensors.temperatures;
+                    for (final Temperature temp : temps) {
+                        System.out.println(temp.name + ": " + temp.value + " C");
+                        tempGpu = temp.value;
+                    }
 
-                  //Print fan speed
-                  List<Fan> fans = gpu.sensors.fans;
-                  for (final Fan fan : fans) {
-                      System.out.println(fan.name + ": " + fan.value + " RPM");
-                  }
+                    //Print fan speed
+                    List<Fan> fans = gpu.sensors.fans;
+                    for (final Fan fan : fans) {
+                        System.out.println(fan.name + ": " + fan.value + " RPM");
+                    }
 
-                  List<Load> loads = gpu.sensors.loads;
-                  for (final Load load : loads) {
-                      System.out.println(load.name + ": " + load.value + " RPM");
-                  }
+                    List<Load> loads = gpu.sensors.loads;
+                    for (final Load load : loads) {
+                        System.out.println(load.name + ": " + load.value + " RPM");
+                    }
                 }
             }
         }
         return tempGpu.intValue();
     }
+
+    public Integer pegaDadosJSensorRpm() {
+        Double rpmGpu = 0.0;
+        Components components = JSensors.get.components();
+
+        List<Gpu> gpus = components.gpus;
+        if (gpus != null) {
+            for (final Gpu gpu : gpus) {
+                System.out.println("Found CPU component: " + gpu.name);
+                if (gpu.sensors != null) {
+                    System.out.println("Sensors: ");
+
+                    //Print temperatures
+                    List<Temperature> temps = gpu.sensors.temperatures;
+                    for (final Temperature temp : temps) {
+                        System.out.println(temp.name + ": " + temp.value + " C");
+
+                    }
+
+                    //Print fan speed
+                    List<Fan> fans = gpu.sensors.fans;
+                    for (final Fan fan : fans) {
+                        System.out.println(fan.name + ": " + fan.value + " RPM");
+                    }
+
+                    List<Load> loads = gpu.sensors.loads;
+                    for (final Load load : loads) {
+                        System.out.println(load.name + ": " + load.value + " RPM");
+                        rpmGpu = load.value;
+                    }
+                }
+            }
+        }
+        return rpmGpu.intValue();
+    }
+
 };

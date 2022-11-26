@@ -43,19 +43,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void setUpOs() {
 
-        
-                   //data/hora atual
-                    LocalDateTime agora = LocalDateTime.now();
+        //data/hora atual
+        LocalDateTime agora = LocalDateTime.now();
 
-                    // formatar a data
-                    DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
-                    String dataFormatada = formatterData.format(agora);
+        // formatar a data
+        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        String dataFormatada = formatterData.format(agora);
 
-                    // formatar a hora
-                    DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
-                    String horaFormatada = formatterHora.format(agora);
-    
-    
+        // formatar a hora
+        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaFormatada = formatterHora.format(agora);
+
         Sistema sistema = looca.getSistema();
         Processador processador = looca.getProcessador();
         Memoria memoria = looca.getMemoria();
@@ -82,12 +80,33 @@ public class Principal extends javax.swing.JFrame {
         gpu.setText("Nome: Geforce Rtx 3050 ");
         gpu2.setText(String.format("Em uso: %d%%", numeroAleatorio));
         id.setText(String.format("%s", sistema.getSistemaOperacional()));
-         id.setForeground(Color.white);
-         logou.setText(String.format("%s logou", processador.getId()));
+        id.setForeground(Color.white);
+        logou.setText(String.format("%s logou", processador.getId()));
 
+        if (memoria.getEmUso() < 20) {
+           logGenerator.LogInfo.generateLogInfo("Info: A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+           
+        } else {
+            
+            logGenerator.LogInfo.generateLogInfo("Info: Memória livre para uso - API Trackio | "
+                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+            
+        }  if(processador.getUso() >= 80){
+         
+               logGenerator.LogInfo.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
+                       + processador.getNome()   + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+         
+         
+        } else {
+         logGenerator.LogInfo.generateLogInfo("Info: Sistema executando de forma otimizada - API Trackio | "
+                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+        }
+    }
+         
      
          
-    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

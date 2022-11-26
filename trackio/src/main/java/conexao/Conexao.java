@@ -27,7 +27,7 @@ public class Conexao  {
         } catch (SQLException ex) {
             
             System.out.println("ERRO ao acessar o banco");
-       
+            logGenerator.LogError.generateLogError(" Error: Ocorreu uma falha ao acessar o banco de dados ");
         }
         return conexao;
     }
