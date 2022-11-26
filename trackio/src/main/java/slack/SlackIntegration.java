@@ -14,31 +14,31 @@ public class SlackIntegration {
     private static String slackChannel = "alertas";
     ConexaoUsuario conexao = new ConexaoUsuario();
 
-    public void enviarMensagemCpu(Insersao insersao, String nomeComponente) {
+    public void enviarMensagemCpu(Insercao insersao, String nomeComponente) {
         sendMessageToSlack(String.format("Computador com o ID %s em estado crítico devido ao"
                 + " componente %s! Pois seu uso está em %.0f%%", conexao.pegaIdMaquina(),
                 nomeComponente, insersao.getTemperatura()));
     }
 
-    public void enviarMensagemDisco(Insersao insersao, String nomeComponente) {
+    public void enviarMensagemDisco(Insercao insersao, String nomeComponente) {
         sendMessageToSlack(String.format("Computador com o ID %s em estado crítico devido ao"
                 + " componente %s! Pois seu uso está em %d%%", conexao.pegaIdMaquina(),
                 nomeComponente, insersao.getDiscoEmUso()));
     }
 
-    public void enviarMensagemRam(Insersao insersao, String nomeComponente) {
+    public void enviarMensagemRam(Insercao insersao, String nomeComponente) {
         sendMessageToSlack(String.format("Computador com o ID %s em estado crítico devido ao"
                 + " componente %s! Pois seu uso está em %.0f%%", conexao.pegaIdMaquina(),
                 nomeComponente, insersao.getMemoriaEmUso()));
     }
 
-    public void enviarMensagemTempGpu(Insersao insersao, String nomeComponente) {
+    public void enviarMensagemTempGpu(Insercao insersao, String nomeComponente) {
         sendMessageToSlack(String.format("Computador com o ID %s em estado crítico devido ao"
                 + " componente %s! Pois seu uso está em %d%%", conexao.pegaIdMaquina(),
                 nomeComponente, insersao.getDadosJsensorTemp()));
     }
 
-    public void enviarMensagemUsoGpu(Insersao insersao, String nomeComponente) {
+    public void enviarMensagemUsoGpu(Insercao insersao, String nomeComponente) {
         sendMessageToSlack(String.format("Computador com o ID %s em estado crítico devido ao"
                 + " componente %s! Pois seu uso está em %d%%", conexao.pegaIdMaquina(),
                 nomeComponente, insersao.getDadosJsensorRpm()));

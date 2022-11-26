@@ -1,7 +1,10 @@
 package slack;
 
 import conexao.ConexaoUsuario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import javax.swing.Timer;
 import logGenerator.LogError;
 
 /**
@@ -13,7 +16,7 @@ public class SlackBd {
     SlackIntegration conexaoSlack = new SlackIntegration();
     ConexaoUsuario conexaoBd = new ConexaoUsuario();
     LogError log = new LogError();
-    Insersao insersao = new Insersao();
+    Insercao insersao = new Insercao();
 
     public void postDisk() throws IOException {
         try {
