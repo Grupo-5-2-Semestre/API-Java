@@ -15,18 +15,26 @@ public class LogError {
 
     public static void generateLogError(String message) {
 
-        Path path = Paths.get("./Downloads/Trackio-JAR/Logs");
+        Path pathGuiDir = Paths.get("./Trackio-JAR");
+        Path pathCliDir = Paths.get("./Trackio-JAR-CLI");
+        Path pathGui = Paths.get("./Trackio-JAR/Trackio-Logs");
+        Path pathCli = Paths.get("./Trackio-JAR-CLI/Trackio-Logs");
 
         try {
-            if (!Files.exists(path)) {
-                Files.createDirectory(path);
+            if (Files.exists(pathGuiDir)) {
+                if (!Files.exists(pathGui)) {
+                    Files.createDirectory(pathGui);
+                }
+            } else {
+                if (!Files.exists(pathCliDir)) {
+                    Files.createDirectory(pathCli);
+                }
             }
 
-            File log = new File("./Downloads/Trackio-JAR/Logs/ErrorLogs.txt");
+            File log = new File("./Trackio-Logs/ErrorLogs.txt");
 
             if (!log.exists()) {
                 log.createNewFile();
-
             }
 
             FileWriter fw = new FileWriter(log, true);
