@@ -19,6 +19,7 @@ public class LogInfo {
    
 	
 public static void generateLogInfo(String message)  {
+<<<<<<< HEAD
 
       
          Path pathGui = Paths.get("./Downloads/Trackio-JAR/Logs");
@@ -39,6 +40,33 @@ public static void generateLogInfo(String message)  {
              }
              
        FileWriter fw = new FileWriter(logGui, true);
+=======
+                              
+    Path pathGuiDir = Paths.get("./Trackio-JAR");
+    Path pathCliDir = Paths.get("./Trackio-JAR-CLI");
+    Path pathGui = Paths.get("./Trackio-JAR/Trackio-Logs");
+    Path pathCli = Paths.get("./Trackio-JAR-CLI/Trackio-Logs");
+		
+    try {
+            if (Files.exists(pathGuiDir)) {
+                if (!Files.exists(pathGui)) {
+                    Files.createDirectory(pathGui);
+                }
+            } else {
+                if (!Files.exists(pathCliDir)) {
+                    Files.createDirectory(pathCli);
+                }
+            }
+
+            File log = new File("./Trackio-Logs/InfoLogs.txt");
+
+           if(!log.exists()) {
+                log.createNewFile();
+  
+           }
+
+            FileWriter fw = new FileWriter(log, true);
+>>>>>>> fb25aaddce30af5a4e88ec4a2ceb53f5b6bf3dae
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.write(message);

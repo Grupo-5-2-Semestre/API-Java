@@ -15,25 +15,21 @@ public class LogError {
 
     public static void generateLogError(String message) {
 
-      
-         Path pathGui = Paths.get("./Downloads/Trackio-JAR/Logs");
-     
-      
-      
+        Path path = Paths.get("./Downloads/Trackio-JAR/Logs");
+
         try {
-                if (!Files.exists(pathGui)) {
-                Files.createDirectory(pathGui);
+            if (!Files.exists(path)) {
+                Files.createDirectory(path);
             }
-          
-        File logGui = new File("./Downloads/Trackio-JAR/Logs/ErrorLogs.txt");
-     
-      
-             if (! logGui.exists()) {
-             logGui.createNewFile();
-             
-             }
-             
-       FileWriter fw = new FileWriter(logGui, true);
+
+            File log = new File("./Downloads/Trackio-JAR/Logs/ErrorLogs.txt");
+
+            if (!log.exists()) {
+                log.createNewFile();
+
+            }
+
+            FileWriter fw = new FileWriter(log, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             bw.write(message);

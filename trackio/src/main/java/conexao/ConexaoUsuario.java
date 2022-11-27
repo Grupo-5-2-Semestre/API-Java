@@ -48,11 +48,9 @@ public class ConexaoUsuario {
             return rs;
 
         } catch (SQLException erro) {
-
             JOptionPane.showMessageDialog(null, "LogarUsuario: " + erro);
-
+            return null;
         }
-        return null;
     }
 
     public void getSlackBd() {

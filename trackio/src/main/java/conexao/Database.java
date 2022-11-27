@@ -26,9 +26,7 @@ public class Database {
       
       dataSource​2.setUsername("root");
 
-      dataSource​2.setPassword("urubu100");  
-
-      dataSource​2.setPassword("urubu100");  
+      dataSource​2.setPassword("urubu100");   
 
       this.connection = new JdbcTemplate(dataSource);
       this.connection2 = new JdbcTemplate(dataSource2);
