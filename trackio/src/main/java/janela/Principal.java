@@ -119,6 +119,7 @@ public class Principal extends javax.swing.JFrame {
 
                 if (memoria.getEmUso() > 0) {
                     logGenerator.LogInfo.generateLogInfo("Info: A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+          
                 } else {
                     logGenerator.LogInfo.generateLogInfo("Info: Memória livre para uso - API Trackio | "
                             + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
@@ -144,23 +145,14 @@ public class Principal extends javax.swing.JFrame {
 
         if (memoria.getEmUso() < 20) {
            logGenerator.LogInfo.generateLogInfo("Info: A memória pode estar comprometida - API Trackio |" + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
-           
-        } else {
-            
-            logGenerator.LogInfo.generateLogInfo("Info: Memória livre para uso - API Trackio | "
-                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+     
             
         }  if(processador.getUso() >= 80){
          
                logGenerator.LogInfo.generateLogInfo("Info: Excesso de processos em execução, seu sistema pode não funcionar corretamente -  API Trackio |  CPU: " 
                        + processador.getNome()   + " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
-         
-         
-        } else {
-         logGenerator.LogInfo.generateLogInfo("Info: Sistema executando de forma otimizada - API Trackio | "
-                    + " Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
         }
-
+      
     }
 
     public void enviarMensagens() {

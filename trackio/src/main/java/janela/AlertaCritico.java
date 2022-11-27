@@ -5,6 +5,8 @@
 package janela;
 
 import java.awt.Cursor;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import slack.Insercao;
 
 /**
@@ -181,15 +183,29 @@ public class AlertaCritico extends javax.swing.JFrame {
     }
     public  void gerarTexto() {
         
+           //data/hora atual
+        LocalDateTime agora = LocalDateTime.now();
+
+        // formatar a data
+        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        String dataFormatada = formatterData.format(agora);
+
+        // formatar a hora
+        DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaFormatada = formatterHora.format(agora);
+
+        
         new AlertaCritico().setVisible(true);
         Insercao insersao = new Insercao();
         
         if (insersao.getMemoriaEmUso() > 0) {
             txtAlerta.setText("A Memória RAM atingiu o nível critico");
+            
+          logGenerator.LogInfo.generateLogInfo("Info: A Memória RAM atingiu o nível critico -  API Trackio | "   +
+               "  Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
+
         }
-        
-        
-        
+       
        // if (insersao.getUsoProcessador() >= 80) {
         //    txtAlerta.setText("O Processador atingiu o nível critico");
         //}
