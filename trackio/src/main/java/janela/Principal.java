@@ -95,10 +95,10 @@ public class Principal extends javax.swing.JFrame {
 
         process.setText(String.format("Temperatura: %.2f °C", insercao.getTemperatura()));
         process2.setText(String.format("Em uso: %.2f%%", insercao.getUsoProcessador()));
-        mem.setText(String.format("Em uso: %.2f%% ", insercao.getMemoriaEmUso()));
+        mem.setText(String.format("Em uso: %.2f GB", insercao.getMemoriaEmUso()));
         mem2.setText(String.format("Tamanho total: %.2f GB ", insercao.getMemoriaTotal()));
         disc.setText(String.format("Tamanho total: %d GB ", insercao.getDiscoTotal()));
-        disc2.setText(String.format("Em uso: %d%%", insercao.getDiscoEmUso()));
+        disc2.setText(String.format("Em uso: %d GB", insercao.getDiscoEmUso()));
         gpu.setText(String.format("Temperatura: %d °C", insercao.getDadosJsensorTemp()));
         gpu2.setText(String.format("Em uso: %d RPM", insercao.getDadosJsensorRpm()));
 
@@ -108,10 +108,10 @@ public class Principal extends javax.swing.JFrame {
 
                 process.setText(String.format("Temperatura: %.2f °C", insercao.getTemperatura()));
                 process2.setText(String.format("Em uso: %.2f%%", insercao.getUsoProcessador()));
-                mem.setText(String.format("Em uso: %.2f%% ", insercao.getMemoriaEmUso()));
+                mem.setText(String.format("Em uso: %.2f GB", insercao.getMemoriaEmUso()));
                 mem2.setText(String.format("Tamanho total: %.2f GB ", insercao.getMemoriaTotal()));
                 disc.setText(String.format("Tamanho total: %d GB ", insercao.getDiscoTotal()));
-                disc2.setText(String.format("Em uso: %d%%", insercao.getDiscoEmUso()));
+                disc2.setText(String.format("Em uso: %d GB", insercao.getDiscoEmUso()));
                 gpu.setText(String.format("Temperatura: %d °C", insercao.getDadosJsensorTemp()));
                 gpu2.setText(String.format("Em uso: %d RPM", insercao.getDadosJsensorRpm()));
 
