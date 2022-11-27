@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import logErrorGenerator.LogError;
+
 import logar.LogarUsuario;
 import org.springframework.jdbc.core.JdbcTemplate;
 import slack.SlackBd;
@@ -91,7 +91,7 @@ public class ConexaoUsuario {
         JdbcTemplate conexao2 = new Database().getConnection2();
         PegaDados pegadados = new PegaDados();
         String identificador = pegadados.getHostname();
-        logInformationGenerator.LogInformation.generateLogInfo("Info: Captura de dados iniciada - API Trackio | " + "Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
+        logGenerator.LogInfo.generateLogInfo("Info: Captura de dados iniciada - API Trackio | " + "Data:" + dataFormatada + " Hora:" + horaFormatada + "\n");
         int delay = 5000; //milliseconds
         String sqlIdMaquina = "SELECT idMaquina FROM Maquina where numeroSerie = '" + identificador + "';";
         Object objetoMaquina = conexao.queryForList(sqlIdMaquina);
