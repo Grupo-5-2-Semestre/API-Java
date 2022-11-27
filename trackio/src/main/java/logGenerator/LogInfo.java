@@ -19,19 +19,27 @@ public class LogInfo {
    
 	
 public static void generateLogInfo(String message)  {
-
                               
-Path path = Paths.get("./Downloads/Trackio-JAR/Logs");
+    Path pathGuiDir = Paths.get("./Trackio-JAR");
+    Path pathCliDir = Paths.get("./Trackio-JAR-CLI");
+    Path pathGui = Paths.get("./Trackio-JAR/Trackio-Logs");
+    Path pathCli = Paths.get("./Trackio-JAR-CLI/Trackio-Logs");
 		
-try{
-if(!Files.exists(path)) {
-      Files.createDirectory(path);
-      }
+    try {
+            if (Files.exists(pathGuiDir)) {
+                if (!Files.exists(pathGui)) {
+                    Files.createDirectory(pathGui);
+                }
+            } else {
+                if (!Files.exists(pathCliDir)) {
+                    Files.createDirectory(pathCli);
+                }
+            }
 
-       File log = new File("./Downloads/Trackio-JAR/Logs/InfoLogs.txt");
+            File log = new File("./Trackio-Logs/InfoLogs.txt");
 
            if(!log.exists()) {
-   log.createNewFile();
+                log.createNewFile();
   
            }
 
