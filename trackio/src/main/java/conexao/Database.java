@@ -22,7 +22,7 @@ public class Database {
       
       dataSource​2.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-      dataSource​2.setUrl("jdbc:mysql://172.17.0.2:3306/bancoTrackio");
+      dataSource​2.setUrl("jdbc:mysql://172.17.0.2:3306/trackio_bd");
       
       dataSource​2.setUsername("root");
 

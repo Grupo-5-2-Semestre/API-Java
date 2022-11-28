@@ -118,20 +118,8 @@ public class ConexaoUsuario {
                     + "(9," + idMaquina + ",1),"
                     + "(10," + idMaquina + ",1);";
             conexao.execute(sqlInsert);
-            
             System.out.println("Inserindo novos componentes Docker");
-            String sqlInsertDocker = String.format("insert into MaquinasComponentes (fkComponente,fkMaquina,statusMC) VALUES "
-                    + "(1," + "1" + ",1),"
-                    + "(2," + "1" + ",1),")
-                    + "(3," + "1" + ",1),"
-                    + "(4," + "1" + ",1),"
-                    + "(6," + "1" + ",1),"
-                    + "(7," + "1" + ",1),"
-                    + "(9," + "1" + ",1),"
-                    + "(10," + "1" + ",1);";
-
-            
-            //conexao2.execute(sqlInsertDocker);
+            conexao2.execute(sqlInsert);
         }
         String queryidCompMaquina = String.format("Select idMaquinaComponente from MaquinasComponentes "
                 + "join Maquina on idMaquina = fkMaquina where numeroSerie = '%s'", identificador);
@@ -148,7 +136,13 @@ public class ConexaoUsuario {
                         pegadados.getDiscoTotal() / 1000000000);
 
                 conexao.execute(sql);
-                //conexao2.execute(sql);
+                String sqlDocker = String.format("insert into LogMaquina (fkMaquinaComponente,fkTipoValor,valor) values "
+                        + "(%d,2,%.0f),(%d,2,%d)",
+                        3,
+                        pegadados.getMemoriaTotal() / 1000000000,
+                        4,
+                        pegadados.getDiscoTotal() / 1000000000);
+                conexao2.execute(sqlDocker);
         
         ActionListener taskPerformer = new ActionListener() {
 
@@ -191,7 +185,23 @@ public class ConexaoUsuario {
                 );
                 
                 conexao.execute(sql);
-                //conexao2.execute(sql);
+                
+                String sqlDocker = String.format("insert into LogMaquina (fkMaquinaComponente,fkTipoValor,valor) values "
+                        + "(%d,1,%.0f),(%d,3,%d),(%d,1,%.0f),(%d,1,%d),(%d,4,%.0f),(%d,4,%d)",
+                        1,
+                        pegadados.getUsoProcessador(),
+                        2,
+                        pegadados.pegaDadosJSensorRpm(),
+                        5,
+                        memoriaEmUso,
+                        6,
+                        discoEmUso,
+                        7,
+                        pegadados.getTemperatura(),
+                        8,
+                        pegadados.pegaDadosJSensorTemp()
+                );
+                conexao2.execute(sqlDocker);
                 //cpu //1
                 //gpu //3
                 //ram //2

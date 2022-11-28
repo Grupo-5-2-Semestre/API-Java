@@ -1,31 +1,44 @@
-insert into Empresa (nomeEmpresa,emailEmpresa,telefoneEmpresa,cnpj,senhaEmpresa) values 
-("C6BANK","c6bank@gmail.com", "1126987630", "12345678901234", "#Urubu100"),
-("E&Y", "ey@gmail.com", "1120930585", "98765432101234", "#Urubu200");
-
-insert into Usuario (nomeUsuario,emailUsuario,senhaUsuario,fkEmpresa) values
-("Marcos", "marcos.roberto@c6bank.com", "#Gf2022", 1),
-("Roberto", "roberto.marcos@ey.com.br", "#Gf2023", 2);
-
-insert into Funcionario (nomeFuncionario,emailFuncionario,telefoneFuncionario,fkUsuario) values
-("Ana Clara", "ana.clara@c6bank.com", "1125665255", 2),
-("Clara Ana", "clara.ana@ey.com.br", "1120930585", 1);
-
-insert into Maquina (numeroSerie,marca,fkFuncionario) values
-("F600", "Samsung", 2),
-("E200", "Dell", 1);
-
-insert into Componente (nomeComponente) values
+create table Componente(
+    idComponente int Primary Key auto_increment,
+    nomeComponente varchar(45) not null
+);
+create table MaquinasComponentes(
+    idMaquinaComponente int Primary Key auto_increment,
+    fkComponente int not null,
+    fkMaquina int not null,
+    foreign key(fkComponente) references Componente(idComponente),
+    statusMC int not null
+);
+create table TiposValores(
+    idTipoValor int Primary Key auto_increment,
+    descIndicador varchar(45) not null
+);
+create table LogMaquina(
+    idLeitura int Primary Key auto_increment,
+    fkMaquinaComponente int not null,
+    fkTipoValor int not null,
+    foreign key(fkMaquinaComponente) references MaquinasComponentes(idMaquinaComponente),
+    foreign key (fkTipoValor) references TiposValores(idTipoValor),
+    valor double not null,
+    dataHora datetime default current_timeStamp not null
+); 
+INSERT INTO Componente (nomeComponente) VALUES
 ("CPU"),
-("memoria RAM");
-
-insert into ComponenteMaquina (fkComponente,fkMaquina,statusMC) values
-(1,2,3),
-(2,1,4);
-
-insert into TiposValores (descIndicador) values
+("GPU"),
+("RAM"),
+("DISCO"),
+("placeholder"),
+("RAM em Uso"),
+("Disco em Uso"),
+("Temperatura do Disco"),
+("Temperatura da CPU"),
+("Temperatura da GPU");
+DELETE FROM Componente WHERE idComponente = 5;
+INSERT INTO TiposValores (descIndicador) VALUES
 ("%"),
-("GM");
+("GB"),
+("RPM"),
+("°C");
 
-insert into LogMaquina (medicao,fkComponente,fkMaquina) values
-("10.2", 1, 2),
-("12.4", 2, 1);
+insert into MaquinasComponentes (fkComponente,fkMaquina,statusMC) VALUES 
+(1,1,1),(2,1,1),(3,1,1),(4,1,1),(6,1,1),(7,1,1),(9,1,1),(10,1,1);
