@@ -1,5 +1,6 @@
 package janela;
 
+import coletardados.PegaDados;
 import conexao.ConexaoUsuario;
 import conexao.Database;
 import java.awt.Color;
@@ -597,18 +598,21 @@ public class Login extends javax.swing.JFrame {
 
         JdbcTemplate conexao = new Database().getConnection();
         JdbcTemplate conexao2 = new Database().getConnection2();
+          PegaDados pegadados = new PegaDados();
 
-        String selectSql = "select * from [dbo].[Funcionario] where nomeFuncionario = '"
+        String selectSql = "select * from [dbo].[Funcionario] "
+                + "join [dbo].[Maquina] on fkFuncionario = idFuncionario"
+                + " where nomeFuncionario = '"
                 + logarusuario.getNomeUsuario()
                 + "' and senhaFuncionario = '"
                 + logarusuario.getSenhaUsuario()
-                + "'";
+                + "' and numeroSerie = '"+pegadados.getHostname()+"'";
 
         List retorno = conexao.queryForList(selectSql);
         if (retorno.size() >= 1) {
             ConexaoUsuario conexaousuario = new ConexaoUsuario();
             conexaousuario.getSlackBd();
-            //conexaousuario.guardarDados();
+            
 
             Principal principal = new Principal();
             principal.setVisible(true);
@@ -616,10 +620,10 @@ public class Login extends javax.swing.JFrame {
 
             logGenerator.LogInfo.generateLogInfo("Info: Tentativa de acesso autorizada -  API Trackio | " + " Username: " + logarusuario.getNomeUsuario()   +
                         " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
-
+            conexaousuario.guardarDados();
         } else {
 
-            JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados");
+            JOptionPane.showMessageDialog(null, "Usuário e/ou Senha errados (Cadastre sua máquina de identificador: "+pegadados.getHostname()+")");
             logGenerator.LogError.generateLogError("Error: Tentativa de acesso negada - API Trackio | " + " Username: " + logarusuario.getNomeUsuario() + 
                         " | Data:" + dataFormatada + " Hora:" + horaFormatada + "\n" );
 

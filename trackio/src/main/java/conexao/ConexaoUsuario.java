@@ -103,6 +103,7 @@ public class ConexaoUsuario {
 
         String sqlExisteComp = "SELECT * FROM MaquinasComponentes where fkMaquina = '" + idMaquina + "';";
         List objetoExisteComp = conexao.queryForList(sqlExisteComp);
+        System.out.println(pegadados.getHostname());
         System.out.println(objetoExisteComp);
 
         if (objetoExisteComp.isEmpty()) {
@@ -116,9 +117,21 @@ public class ConexaoUsuario {
                     + "(7," + idMaquina + ",1),"
                     + "(9," + idMaquina + ",1),"
                     + "(10," + idMaquina + ",1);";
-
             conexao.execute(sqlInsert);
-            conexao2.execute(sqlInsert);
+            
+            System.out.println("Inserindo novos componentes Docker");
+            String sqlInsertDocker = String.format("insert into MaquinasComponentes (fkComponente,fkMaquina,statusMC) VALUES "
+                    + "(1," + "1" + ",1),"
+                    + "(2," + "1" + ",1),")
+                    + "(3," + "1" + ",1),"
+                    + "(4," + "1" + ",1),"
+                    + "(6," + "1" + ",1),"
+                    + "(7," + "1" + ",1),"
+                    + "(9," + "1" + ",1),"
+                    + "(10," + "1" + ",1);";
+
+            
+            //conexao2.execute(sqlInsertDocker);
         }
         String queryidCompMaquina = String.format("Select idMaquinaComponente from MaquinasComponentes "
                 + "join Maquina on idMaquina = fkMaquina where numeroSerie = '%s'", identificador);
@@ -126,25 +139,35 @@ public class ConexaoUsuario {
 
         System.out.println("Preparando para inserir");
         System.out.println("Dados inseridos: ");
+        
+        String sql = String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
+                        + "(%d,2,%.0f),(%d,2,%d)",
+                        formatarID(idMaquinaComp.get(2)),
+                        pegadados.getMemoriaTotal() / 1000000000,
+                        formatarID(idMaquinaComp.get(3)),
+                        pegadados.getDiscoTotal() / 1000000000);
 
+                conexao.execute(sql);
+                //conexao2.execute(sql);
+        
         ActionListener taskPerformer = new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
 
+                Double memoriaEmUso = ((pegadados.getMemoriaEmUso() / 1000000000)*100 /  (pegadados.getMemoriaTotal() / 1000000000));
+                Long discoEmUso = ((pegadados.getDiscoEmUso() / 1000000000)*100 /  (pegadados.getDiscoTotal() / 1000000000));
+                
+                
                 System.out.println(String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
-                        + "(%d,1,%.0f),(%d,3,%d),(%d,2,%.0f),(%d,2,%d),(%d,2,%.0f),(%d,2,%d),(%d,4,%.0f),(%d,4,%d)",
+                        + "(%d,1,%.0f),(%d,3,%d),(%d,1,%.0f),(%d,1,%d),(%d,4,%.0f),(%d,4,%d)",
                         formatarID(idMaquinaComp.get(0)),
                         pegadados.getUsoProcessador(),
                         formatarID(idMaquinaComp.get(1)),
                         pegadados.pegaDadosJSensorRpm(),
-                        formatarID(idMaquinaComp.get(2)),
-                        pegadados.getMemoriaTotal() / 1000000000,
-                        formatarID(idMaquinaComp.get(3)),
-                        pegadados.getDiscoTotal() / 1000000000,
                         formatarID(idMaquinaComp.get(4)),
-                        pegadados.getMemoriaEmUso() / 1000000000,
+                        memoriaEmUso,
                         formatarID(idMaquinaComp.get(5)),
-                        pegadados.getDiscoEmUso() / 1000000000,
+                        discoEmUso,
                         formatarID(idMaquinaComp.get(6)),
                         pegadados.getTemperatura(),
                         formatarID(idMaquinaComp.get(7)),
@@ -152,27 +175,23 @@ public class ConexaoUsuario {
                 ));
 
                 String sql = String.format("insert into [dbo].[LogMaquina] (fkMaquinaComponente,fkTipoValor,valor) values "
-                        + "(%d,1,%.0f),(%d,3,%d),(%d,2,%.0f),(%d,2,%d),(%d,2,%.0f),(%d,2,%d),(%d,4,%.0f),(%d,4,%d)",
+                        + "(%d,1,%.0f),(%d,3,%d),(%d,1,%.0f),(%d,1,%d),(%d,4,%.0f),(%d,4,%d)",
                         formatarID(idMaquinaComp.get(0)),
                         pegadados.getUsoProcessador(),
                         formatarID(idMaquinaComp.get(1)),
                         pegadados.pegaDadosJSensorRpm(),
-                        formatarID(idMaquinaComp.get(2)),
-                        pegadados.getMemoriaTotal() / 1000000000,
-                        formatarID(idMaquinaComp.get(3)),
-                        pegadados.getDiscoTotal() / 1000000000,
                         formatarID(idMaquinaComp.get(4)),
-                        pegadados.getMemoriaEmUso() / 1000000000,
+                        memoriaEmUso,
                         formatarID(idMaquinaComp.get(5)),
-                        pegadados.getDiscoEmUso() / 1000000000,
+                        discoEmUso,
                         formatarID(idMaquinaComp.get(6)),
                         pegadados.getTemperatura(),
                         formatarID(idMaquinaComp.get(7)),
                         pegadados.pegaDadosJSensorTemp()
                 );
-
+                
                 conexao.execute(sql);
-                conexao2.execute(sql);
+                //conexao2.execute(sql);
                 //cpu //1
                 //gpu //3
                 //ram //2
